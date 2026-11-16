@@ -1,32 +1,32 @@
-# Orbformer 训练示例：LiCN 单卡、H₄ 单卡与乙烷四卡
+# Orbformer 训练示例：LiCN / H₄ 单卡与乙烷 / 甲酰胺四卡
 
-本文按 **LiCN → H₄ → 乙烷** 的顺序介绍三套实验的物理体系、训练设置、输出位置和主要指标。前两套作为单卡示例，乙烷作为单节点四卡示例。本文中的 `runs/...` 路径均相对于仓库根目录。这些输出用于说明原机器的实验布局；GitHub 交付只包含代码、结构和参考能量输入，不包含 checkpoint、日志、评估结果或运行目录。
+本文按 **LiCN → H₄ → 乙烷 → 甲酰胺** 的顺序介绍四套实验的物理体系、训练设置、输出位置和主要指标。前两套作为单卡示例，乙烷和甲酰胺作为单节点四卡示例。本文中的 `runs/...` 路径均相对于仓库根目录。这些输出用于说明原机器的实验布局；GitHub 交付只包含代码、结构和参考能量输入，不包含 checkpoint、日志、评估结果或运行目录。
 
-三套实验都使用完整的 **Orbformer-SE 从头训练**：随机初始化、不加载 LAC 或其他外部 checkpoint、Hartree–Fock（HF）预训练为 0 步。训练通过变分蒙特卡洛（VMC）最小化电子能量；LiCN 和乙烷的参考能量仅用于统计误差，不作为监督标签。
+四套实验都使用完整的 **Orbformer-SE 从头训练**：随机初始化、不加载 LAC 或其他外部 checkpoint、Hartree–Fock（HF）预训练为 0 步。训练通过变分蒙特卡洛（VMC）最小化电子能量；LiCN、乙烷和甲酰胺的参考能量仅用于统计误差，不作为监督标签。
 
 ## 1. 总览与共同设置
 
-| 项目 | LiCN：单卡示例 | H₄(6)：单卡示例 | 乙烷：四卡示例 |
-| --- | --- | --- | --- |
-| GPU | 1 × A100 80GB | 1 × A100 80GB | 4 × A100 80GB，单节点 |
-| 训练 geometry 总数 | 5 | 6 | 20 |
-| 每个 geometry 的原子 / 电子数 | 3 / 16 | 4 / 4 | 8 / 18 |
-| 上 / 下自旋电子数 | 8 / 8 | 2 / 2 | 9 / 9 |
-| 每步全局 geometry batch | **1** | **6** | **4**，每卡 1 个 |
-| 每个 geometry 的电子构型数 | **2048** | **256** | **256** |
-| 每步全局电子构型数 | 2048 | 1536 | 1024 |
-| 目标参数更新数 | **20,000** | **16,000** | **32,000** |
-| seed | 42 | 219 | 219 |
-| 模型参数量 | 3,030,618 | 3,026,730 | 3,029,650 |
-| 阶段 checkpoint 间隔 | 10,000 步 | 2000 步 | 8000 步 |
-| 主要观察指标 | **MARE 曲线** | **能量收敛曲线** | **MARE 曲线** |
-| 编写时状态（2026-11-16） | 已启动，训练中 | 已完成 16k 步 | 已完成 32k 步 |
+| 项目 | LiCN：单卡示例 | H₄(6)：单卡示例 | 乙烷：四卡示例 | 甲酰胺：四卡示例 |
+| --- | --- | --- | --- | --- |
+| GPU | 1 × A100 80GB | 1 × A100 80GB | 4 × A100 80GB，单节点 | 4 × A100 80GB，单节点 |
+| 训练 geometry 总数 | 5 | 6 | 20 | 20 |
+| 每个 geometry 的原子 / 电子数 | 3 / 16 | 4 / 4 | 8 / 18 | 6 / 24 |
+| 上 / 下自旋电子数 | 8 / 8 | 2 / 2 | 9 / 9 | 12 / 12 |
+| 每步全局 geometry batch | **1** | **6** | **4**，每卡 1 个 | **4**，每卡 1 个 |
+| 每个 geometry 的电子构型数 | **2048** | **256** | **256** | **256** |
+| 每步全局电子构型数 | 2048 | 1536 | 1024 | 1024 |
+| 目标参数更新数 | **20,000** | **16,000** | **32,000** | **32,000** |
+| seed | 42 | 219 | 219 | 219 |
+| 模型参数量 | 3,030,618 | 3,026,730 | 3,029,650 | 3,031,714 |
+| 阶段 checkpoint 间隔 | 10,000 步 | 2000 步 | 8000 步 | 8000 步 |
+| 主要观察指标 | **MARE 曲线** | **能量收敛曲线** | **MARE 曲线** | **MARE 曲线** |
+| 编写时状态（2026-11-16） | 已启动，训练中 | 已完成 16k 步 | 已完成 32k 步 | 以运行状态文件为准 |
 
 **geometry 是固定的一组核坐标；电子构型是一组完整的电子坐标。** 例如 LiCN 的 `1×2048` 表示每次更新选取 1 个核构型，对该结构采样 2048 组、每组含 16 个电子的坐标。数据集仍有 5 个 geometry，并非只训练其中一个。本文步数均为全局优化器更新次数，四卡的 32k 步不再乘以 4。
 
-共同训练设置如下，三套实验的完整实际参数以各自 `results/training/config.yaml` 为准：
+共同训练设置如下，四套实验的完整实际参数以各自 `results/training/config.yaml` 为准：
 
-| 设置 | 三套实验共同取值 |
+| 设置 | 四套实验共同取值 |
 | --- | --- |
 | 模型 / 参数共享模式 | `orbformer-se` / `chem-pretrain` |
 | 初始化 | 随机参数；`chkpt=None`；`pretrain_steps=0` |
@@ -41,7 +41,7 @@
 
 `chem-pretrain` 是上游共享 orbital generator 的模式名称，本身不表示加载了预训练权重。K-FAC 的 0.05 是基础学习率；实际使用 `InverseScheduleLinearRamp(0.05, train_steps // 2, 250)`，有预热和衰减。因此缩短训练步数也会改变学习率计划，短跑检查不能直接接作正式训练的前缀。
 
-源码基线为 `46ddc5a239650672a3b9eb276b292d3326c79ad5`。已运行环境为 Linux、Python 3.11、JAX 0.4.34、A100 80GB；安装步骤和依赖版本见[环境准备说明](ETHANE_SCRATCH_RUNBOOK_zh.md#3-环境准备)及[依赖文件](../requirements/ethane-a100-py311.txt)，同一环境可运行三个示例。
+源码基线为 `46ddc5a239650672a3b9eb276b292d3326c79ad5`。已运行环境为 Linux、Python 3.11、JAX 0.4.34、A100 80GB；安装步骤和依赖版本见[环境准备说明](ETHANE_SCRATCH_RUNBOOK_zh.md#3-环境准备)及[依赖文件](../requirements/ethane-a100-py311.txt)，同一环境可运行四个示例。
 
 ## 2. LiCN：单卡、多几何、默认 batch 的从头训练
 
@@ -85,7 +85,7 @@ CUDA_VISIBLE_DEVICES=0 python scripts/transferable.py \
 
 ### 2.3 当前输出位置与应看指标
 
-实验根目录：`runs/licn_default_1gpu_20k_s42/`（`runs/licn_default_1gpu_20k_s42/`，原机器输出）。
+实验根目录：`runs/licn_default_1gpu_20k_s42/`（原机器输出）。
 
 | 文件或目录（相对于该根目录） | 内容与用途 |
 | --- | --- |
@@ -104,7 +104,7 @@ CUDA_VISIBLE_DEVICES=0 python scripts/transferable.py \
 | `logs/mare_export.log` | 自动导出器日志；MARE 不刷新时检查此处 |
 | `exitcode_remote.txt` | 训练进程结束后生成，正常退出为 0 |
 
-**主要看 MARE 是否随训练降低，以及后期是否进入稳定区间。** `mare_online.csv` 的横轴列为 `completed_updates`，纵轴列为 `mare_kcal_mol`；`step` 是从 0 开始的原生索引，比已完成更新数小 1。计算方法见第 5 节。
+**主要看 MARE 是否随训练降低，以及后期是否进入稳定区间。** `mare_online.csv` 的横轴列为 `completed_updates`，纵轴列为 `mare_kcal_mol`；`step` 是从 0 开始的原生索引，比已完成更新数小 1。计算方法见第 6 节。
 
 当前任务每 **60 秒**自动刷新一次 MARE CSV 和最新摘要，训练结束后还会导出一次。因此 CSV 可能比 HDF5 落后约一分钟。曲线须等五个 geometry 均有有效能量后才开始。原始 `data/licn` 没有参考能量元数据；本任务只在冻结的数据副本中补入参考值，用于原生日志统计。仓库中的 `examples/licn_scratch/mare.py` 直接读取参考 CSV，因此对新训练无需修改 geometry YAML。
 
@@ -156,7 +156,7 @@ CUDA_VISIBLE_DEVICES=0 python examples/h4_rectangle/run.py \
 
 ### 3.3 当前输出位置与应看指标
 
-实验根目录：`runs/h4_globe6_scratch_1gpu_16k_s219/`（`runs/h4_globe6_scratch_1gpu_16k_s219/`，原机器输出）。
+实验根目录：`runs/h4_globe6_scratch_1gpu_16k_s219/`（原机器输出）。
 
 | 文件或目录（相对于该根目录） | 内容与用途 |
 | --- | --- |
@@ -212,7 +212,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python examples/ethane_scratch/run.py \
 
 ### 4.3 当前输出位置与应看指标
 
-实验根目录：`runs/ethane_scratch_4gpu_32k_s219/`（`runs/ethane_scratch_4gpu_32k_s219/`，原机器输出）。
+实验根目录：`runs/ethane_scratch_4gpu_32k_s219/`（原机器输出）。
 
 | 文件或目录（相对于该根目录） | 内容与用途 |
 | --- | --- |
@@ -236,9 +236,73 @@ python examples/ethane_scratch/mare.py \
   --run-dir runs/ethane_scratch_4gpu_32k_s219/results --kind online
 ```
 
-## 5. LiCN 与乙烷的 MARE 应如何理解
+## 5. 甲酰胺（Formamide）：四卡、20 点 N–H 断键路径
 
-两个算例采用相同的参考居中定义。设路径有 N 个 geometry，`E_i(t)` 为训练到 t 时各结构最近的能量指数加权滑动平均（EWM），`E_ref_i` 为对应参考能量：
+### 5.1 算例内容
+
+输入为 [`data/bbmep/Formamide/00.yaml` 至 `19.yaml`](../data/bbmep/Formamide/00.yaml)，对应甲酰胺的 N–H 键均裂路径：
+
+```text
+HCONH₂ → HCONH· + H·
+```
+
+每个 geometry 含 1 个 C、1 个 N、1 个 O、3 个 H，共 **6 个原子、24 个电子**，上下自旋各 **12** 个，中性、总 spin 为 0。20 个结构覆盖从结合态到氢原子远离的路径；首尾结构的 N–H 距离约为 **1.0126 Å → 5.9658 Å**。训练使用这些固定核坐标，不重新优化几何结构。
+
+参考能量来自上游 BBMEP 表中 `MEP_system == Formamide`、`Image_ID=0..19` 的 20 行，已单独保存在 [`data/references/formamide_bbmep_reference_energy.csv`](../data/references/formamide_bbmep_reference_energy.csv)，包含参考能量、原表误差估计和固定版本来源。其为 deep QMC 参考能量，作为 MARE 基准输入，不参与训练损失。
+
+### 5.2 训练设置与启动
+
+本次采用论文 BBMEP 多结构联合训练的 batch 布局，并先跑较短的 32k 步基线：**单节点 4 张 A100 80GB，单 Python 进程，JAX `pmap`；全局每步 4 个 geometry，每卡 1 个，每个 geometry 256 个完整电子构型**。全局电子构型 batch 为 **1024**，全部 20 个 geometry 共享一套完整 Orbformer-SE 模型参数。
+
+目标为 **32,000 次全局 K-FAC 参数更新**，seed **219**，从随机参数开始，**HF 预训练 0 步，不加载外部 checkpoint**。每个 geometry 平均参与约 6400 次更新。其余设置见第 1 节；阶段 checkpoint 每 8000 步保存，最终目标为 `chkpt-32000.pt`。论文表 9 列出的甲酰胺多结构训练长度为 100k 步；本次为缩短耗时先采用 32k 步，不声称复现其完整训练长度。论文图还包含 LAC 微调分支，本任务采用多结构从头训练。
+
+配套入口为 [`examples/formamide_scratch/run.py`](../examples/formamide_scratch/run.py)，固定参数见 [`setting.json`](../examples/formamide_scratch/setting.json)。使用已安装环境及第 2 节的环境变量，在仓库根目录启动新任务：
+
+```bash
+mkdir -p logs
+CUDA_VISIBLE_DEVICES=0,1,2,3 python examples/formamide_scratch/run.py \
+  --mode train --devices 4 --output runs/formamide_example_new/results \
+  > logs/formamide_example_new.log 2>&1
+```
+
+调度器已分配设备时保留其 `CUDA_VISIBLE_DEVICES`。不需要四个 Python 进程。命令加 `--dry-run` 可预览；使用 `--mode smoke` 可进行单卡、单 geometry 的短运行检查，默认 2 步。本次提交前另外执行 25 步单卡检查，以验证每卡真实的 256 采样配置和检查点。正式训练使用新输出目录，不接续检查参数。
+
+当前任务设有 **24 小时**进程保护上限，达到 32k 步即正常结束；该上限不是预计耗时。实际速度应在四卡完成编译、平衡后测量，不能沿用 18 电子乙烷或 16 电子 LiCN 的单步耗时。需要续训时，对同一目录以同一目标和配置增加 `--resume`，继续到总计 32,000 步。
+
+### 5.3 当前输出位置与应看指标
+
+实验根目录：`runs/formamide_scratch_4gpu_32k_s219/`（原机器输出）。任务阶段以 `results/runtime_status.json` 和日志为准。
+
+| 文件或目录（相对于该根目录） | 内容与用途 |
+| --- | --- |
+| `protocol.json`、`source_sha256.json`、`code/` | 冻结的实验协议、文件哈希、实际运行代码和全部 20 个输入结构 |
+| `code/data/references/formamide_bbmep_reference_energy.csv` | 本次 MARE 所用 20 点参考表 |
+| `results/launch.json` | 实际原生命令、全部上游参数和 geometry 哈希 |
+| `results/runtime_status.json` | 运行阶段、四卡通信检查；结束后记录完成步数及 checkpoint 重载验证 |
+| `results/oneqmc_train.log` | 初始化、平衡、训练进度和能量日志 |
+| `logs/stdout_stderr.log` | 标准输出、错误和编译日志 |
+| `results/training/config.yaml`、`result.h5`、`events.out.tfevents.*` | 实际配置、逐 geometry 原始指标和 TensorBoard 标量 |
+| `results/training/chkpt-8000.pt` 等 | 每 8000 步阶段 checkpoint；最终为 `chkpt-32000.pt` |
+| `results/analysis/mare_online.csv` | **主要指标：20 点路径的在线 EWM MARE 曲线数据** |
+| `results/analysis/mare_online_latest.json` | 导出时间、覆盖步数、MARE 及参考表哈希 |
+| `results/analysis/energy_online_latest.csv` | 逐结构能量、EWM 误差估计、参考能量及居中相对误差 |
+| `logs/mare_export.log` | 自动 MARE 导出器日志 |
+| `exitcode_remote.txt` | 训练结束后生成；正常退出为 0 |
+
+**主要看 MARE 是否持续下降并在后期稳定。** 指标定义见第 6 节；CSV 列名与乙烷一致：`optimizer_updates` 和 `MARE_online_EWM_kcal_per_mol`。覆盖全部 20 个结构后才开始导出；当前任务每 **60 秒**刷新一次 CSV / JSON，结束后再导出一次，不需要反复手动运行后处理。
+
+对于自行启动的新实验，可在另一终端启动同一后处理：
+
+```bash
+python examples/formamide_scratch/mare.py \
+  --run-dir runs/formamide_example_new/results --watch
+```
+
+同一目录只开一个导出器。图片需手动生成或刷新，见第 7.3 节。在线 MARE 是训练中的滑动统计，不是固定 checkpoint 的独立评估；若进一步进行独立评估，采样成本另计，具体入口和输出说明见 [甲酰胺示例说明](../examples/formamide_scratch/README.md)。
+
+## 6. LiCN、乙烷与甲酰胺的 MARE 应如何理解
+
+三个有参考能量的算例采用相同的参考居中定义。设路径有 N 个 geometry，`E_i(t)` 为训练到 t 时各结构最近的能量指数加权滑动平均（EWM），`E_ref_i` 为对应参考能量：
 
 ```text
 MARE(t) = 627.5 / N × Σ_i |[E_i(t) − mean(E(t))] − [E_ref_i − mean(E_ref)]|
@@ -246,13 +310,13 @@ MARE(t) = 627.5 / N × Σ_i |[E_i(t) − mean(E(t))] − [E_ref_i − mean(E_ref
 
 输入能量单位为 Hartree，627.5 将误差转换为 kcal/mol。**MARE 是去掉整体能量偏移后、相对能量曲线的平均绝对误差，不是百分比。** 因此还应结合 `energy_online_latest.csv` 查看每个点的能量与相对误差；MARE 小并不单独保证绝对总能量准确。
 
-LiCN 每步更新 1/5 的结构，乙烷每步更新 4/20 的结构。导出器按 geometry 索引维护最近有效 EWM，覆盖全部结构后才计算 MARE；同一行 MARE 中各 geometry 的最近更新时间可能不同。两套曲线均用于观察训练趋势，包含滑动平均和采样噪声，不是固定模型的独立评估，也不是未见 geometry 的泛化误差。
+LiCN 每步更新 1/5 的结构，乙烷和甲酰胺均每步更新 4/20 的结构。导出器按 geometry 索引维护最近有效 EWM，覆盖全部结构后才计算 MARE；同一行 MARE 中各 geometry 的最近更新时间可能不同。这三套 MARE 曲线均用于观察训练趋势，包含滑动平均和采样噪声，不是固定模型的独立评估，也不是未见 geometry 的泛化误差。
 
 查看曲线时，应关注持续下降、后期平台和反复波动，不能仅凭某一个较低的点判断收敛。图中的 1 kcal/mol 是便于阅读的参考线；在线平均误差低于该线并不保证每个结构误差都小于 1 kcal/mol。
 
-## 6. 曲线查看与重新生成
+## 7. 曲线查看与重新生成
 
-### 6.1 LiCN：绘制当前 MARE 快照
+### 7.1 LiCN：绘制当前 MARE 快照
 
 当前任务自动刷新 CSV / JSON，PNG / PDF 使用以下命令手动生成或刷新。该命令只读取 CSV，不改训练配置或模型：
 
@@ -290,7 +354,7 @@ PY
 
 曲线文件为 `LiCN MARE PNG`（`runs/licn_default_1gpu_20k_s42/results/analysis/mare_online.png`，原机器输出）。训练继续时，需重跑以上绘图命令才能更新图片；以 CSV 的最新步数为准，不能将早期图片当成完整 20k 结果。
 
-### 6.2 H₄ 与乙烷：重新生成已有图
+### 7.2 H₄ 与乙烷：重新生成已有图
 
 两套任务均已完成，可执行：
 
@@ -306,15 +370,27 @@ python examples/plot_training_curves.py --window 200
 
 若对新输出目录重绘，可传 `--ethane-run runs/ethane_example_new/results --h4-run runs/h4_example_new/results --output-dir runs/analysis_new`，并先为新乙烷运行导出 MARE。
 
-## 7. 实验目录、进度和完成检查
+### 7.3 甲酰胺：绘制自动导出的 MARE
 
-当前仓库位于 `/project_c20250506/251105015/oneqmc`。三个 `runs/...` 都是指向项目盘实验目录的软链接，训练工作目录是各自的 **`results/`**：
+当前任务的 CSV / JSON 自动刷新，图为手动生成的快照。出现完整 20 点有效统计后，从仓库根目录执行：
+
+```bash
+python examples/formamide_scratch/plot_mare.py \
+  --run-dir runs/formamide_scratch_4gpu_32k_s219/results
+```
+
+生成 `runs/formamide_scratch_4gpu_32k_s219/results/analysis/mare_online.png` 和 `.pdf`。横轴是全局更新次数，纵轴是在线 MARE（kcal/mol），虚线为 1 kcal/mol 参考线。图标题注明快照覆盖步数；训练继续后重新运行绘图命令。
+
+## 8. 实验目录、进度和完成检查
+
+当前仓库位于 `/project_c20250506/251105015/oneqmc`。四个 `runs/...` 都是指向项目盘实验目录的软链接，训练工作目录是各自的 **`results/`**：
 
 | 仓库内实验根目录 | 实际目录（前缀均为 `/project_c20250506/251105015/oneqmc_runs/`） |
 | --- | --- |
 | `runs/licn_default_1gpu_20k_s42` | `licn_default_1gpu_g1_e2048_20k_s42_20261116_212025` |
 | `runs/h4_globe6_scratch_1gpu_16k_s219` | `h4_globe6_scratch_1gpu_g6_e256_16k_s219_20261116_174502` |
 | `runs/ethane_scratch_4gpu_32k_s219` | `ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050` |
+| `runs/formamide_scratch_4gpu_32k_s219` | `formamide_scratch_4gpu_g4_e256_32k_s219_20261116_220449` |
 
 实验根目录的 `code/`、`protocol.json`、`source_sha256.json` 供核对实际输入和源码；`results/training/config.yaml` 是已解析的训练参数，修改仓库中的 `setting.json` 不会改变已启动的冻结任务。`runtime_status.json` 主要记录阶段，训练时不会逐步刷新已完成更新数。
 
@@ -324,7 +400,7 @@ python examples/plot_training_curves.py --window 200
 tail -f runs/licn_default_1gpu_20k_s42/results/oneqmc_train.log
 ```
 
-查看三个任务已写入的更新数（HDF5 只读 SWMR，不打断训练）：
+查看四个任务已写入的更新数（HDF5 只读 SWMR，不打断训练）：
 
 ```bash
 python - <<'PY'
@@ -332,7 +408,8 @@ from pathlib import Path
 import h5py
 for name in ('licn_default_1gpu_20k_s42',
              'h4_globe6_scratch_1gpu_16k_s219',
-             'ethane_scratch_4gpu_32k_s219'):
+             'ethane_scratch_4gpu_32k_s219',
+             'formamide_scratch_4gpu_32k_s219'):
     with h5py.File(Path('runs') / name / 'results/training/result.h5',
                    'r', swmr=True) as stream:
         indices = stream['metrics/mol_idx']
@@ -352,4 +429,4 @@ tensorboard --logdir runs/licn_default_1gpu_20k_s42/results/training \
 
 训练完成应同时核对目标步数、`runtime_status.json` 的 `COMPLETE`、正常退出码 0，以及目标步数 checkpoint 的重载验证。`chkpt--1.pt` 是滚动保存的快速 checkpoint，文件名不表示训练只有 1 步；其实际步数保存在文件内部。
 
-以上路径描述当前机器的已有实验；`runs/` 被 Git 忽略，克隆代码库不会自动得到这些日志、图片和 checkpoint。迁移时应单独复制所需实验目录，或用新输出目录重新运行。三套训练与后处理之间的指标口径，以本文第 3、5 节和对应元数据文件为准。
+以上路径描述当前机器的已有实验；`runs/` 被 Git 忽略，克隆代码库不会自动得到这些日志、图片和 checkpoint。迁移时应单独复制所需实验目录，或用新输出目录重新运行。四套训练与后处理之间的指标口径，以本文第 3、6 节和对应元数据文件为准。

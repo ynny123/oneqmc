@@ -8,7 +8,7 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
-This fork provides three Orbformer-SE scratch-training examples. All start from
+This fork provides four Orbformer-SE scratch-training examples. All start from
 random parameters with zero HF pretraining and require no pretrained checkpoint.
 Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
 for the systems, full settings, launch commands, output layout, and metrics.
@@ -18,8 +18,9 @@ for the systems, full settings, launch commands, output layout, and metrics.
 | LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
 | H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 219 | Absolute mean energy (Ha), 200-step trailing average |
 | Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
+| Formamide BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
 
-H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
+H4 energy is plotted directly without subtracting a minimum. LiCN, Ethane, and Formamide
 MARE use reference-centered relative energies; the online curves are training
 diagnostics rather than independent fixed-checkpoint evaluations.
 
@@ -71,8 +72,9 @@ documented in the [Chinese runbook](docs/ETHANE_SCRATCH_RUNBOOK_zh.md#3-环境�
 
 The main entrypoint for running wave function training and fine-tuning is `transferable.py`.
 
-The [three-example guide](docs/TRAINING_EXAMPLES_zh.md) covers both single-GPU
-examples and the four-GPU example. The [H4 guide](examples/h4_rectangle/README.md)
+The [four-example guide](docs/TRAINING_EXAMPLES_zh.md) covers both single-GPU
+examples and the two four-GPU examples. The [Formamide guide](examples/formamide_scratch/README.md)
+provides its launch, resume, and automatic MARE-export commands. The [H4 guide](examples/h4_rectangle/README.md)
 also documents the six-rectangle geometry convention.
 
 For a complete Chinese walkthrough of the Ethane BBMEP scratch-training setting

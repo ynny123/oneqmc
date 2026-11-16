@@ -44,4 +44,4 @@ CUDA_VISIBLE_DEVICES=0 python examples/h4_rectangle/run.py \
 
 六个 geometry 的文件索引 00–05 对应上述角度顺序。检查程序完整运行与判断能量收敛是两项不同的验收：后者还需要固定模型后的独立采样和一致的参考能量。
 
-已有实验的能量曲线位于 `runs/h4_globe6_scratch_1gpu_16k_s219/results/analysis/h4_convergence.png`。曲线直接显示六个 geometry 等权平均后的绝对训练能量，使用 200 步向后滑动平均，单位 Hartree，不减去最低能量。`h4_convergence_fullrange.png` 另叠加从第 1 步开始的未平滑平均能量。数据及三个训练示例的设置、输出位置见[训练示例总说明](../../docs/TRAINING_EXAMPLES_zh.md)。
+已有实验的能量曲线位于 `runs/h4_globe6_scratch_1gpu_16k_s219/results/analysis/h4_convergence.png`。曲线直接显示六个 geometry 等权平均后的绝对训练能量，使用 200 步向后滑动平均，单位 Hartree，不减去最低能量。`h4_convergence_fullrange.png` 另叠加从第 1 步开始的未平滑平均能量。数据及四个训练示例的设置、输出位置见[训练示例总说明](../../docs/TRAINING_EXAMPLES_zh.md)。
