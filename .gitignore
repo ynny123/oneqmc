@@ -151,3 +151,12 @@ runs/
 events.out.tfevents.*
 **/analysis/mare_online*
 **/analysis/energy_online*
+
+# Model weights and generated training artifacts are not part of this delivery.
+*.pt
+*.pth
+*.ckpt
+*.chkpt
+/checkpoints/
+*.h5
+*.hdf5

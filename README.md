@@ -8,14 +8,26 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
-This handoff branch adds a portable Ethane scratch-training example. Start with
-[乙烷多几何从头训练运行说明](docs/ETHANE_SCRATCH_RUNBOOK_zh.md) for installation,
-the single-device check, four-device training, resume, and MARE evaluation.
-Published experiment outputs in `experiment_results/` have been removed from
-this branch. The 20 Ethane reference energies needed by the example are retained
-as input data in `data/references/ethane_bbmep_reference_energy.csv`.
-Paper figure notebooks require the original upstream result files to reproduce
-the published figures. See [交付版本说明](docs/GITHUB_HANDOFF_zh.md).
+This fork provides three Orbformer-SE scratch-training examples. All start from
+random parameters with zero HF pretraining and require no pretrained checkpoint.
+Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
+for the systems, full settings, launch commands, output layout, and metrics.
+
+| Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
+| --- | --- | --- | --- | --- |
+| LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
+| H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 219 | Absolute mean energy (Ha), 200-step trailing average |
+| Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
+
+H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
+MARE use reference-centered relative energies; the online curves are training
+diagnostics rather than independent fixed-checkpoint evaluations.
+
+Only code, documentation, geometry inputs, and small reference-energy tables in
+`data/references/` are included. **Checkpoint weights (including LAC), local
+`runs/`, logs, generated curves, and published `experiment_results/` are excluded.**
+Paper figure notebooks require separately obtained upstream result files.
+See [交付版本说明](docs/GITHUB_HANDOFF_zh.md).
 
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints
@@ -46,15 +58,22 @@ This should take several minutes.
 export PYTHONPATH=$PYTHONPATH:$PWD/src
 ```
 
-4. Test your set-up by running a simple single-point fine-tuning using the LAC checkpoint
+4. Test your set-up with the two-update single-GPU H4 scratch example
 ```bash
-python scripts/transferable.py -d CH4 -c checkpoints/lac/lac.chkpt --discard-sampler-state --max-eq-steps 100
+export XLA_PYTHON_CLIENT_PREALLOCATE=false JAX_ENABLE_X64=false
+CUDA_VISIBLE_DEVICES=0 python examples/h4_rectangle/run.py --mode smoke --output runs/h4_smoke
 ```
-This could take several minutes to start, and can run for several hours or until killed.
+Use a fresh output directory. The first run includes compilation and can take
+several minutes. Installation details and the locked Python 3.11 environment are
+documented in the [Chinese runbook](docs/ETHANE_SCRATCH_RUNBOOK_zh.md#3-环境准备).
 
 ## Running Orbformer
 
 The main entrypoint for running wave function training and fine-tuning is `transferable.py`.
+
+The [three-example guide](docs/TRAINING_EXAMPLES_zh.md) covers both single-GPU
+examples and the four-GPU example. The [H4 guide](examples/h4_rectangle/README.md)
+also documents the six-rectangle geometry convention.
 
 For a complete Chinese walkthrough of the Ethane BBMEP scratch-training setting
 (4 devices, 20 geometries, 256 electron configurations per geometry, 32k updates),
@@ -69,9 +88,10 @@ processed into our format by running
 python scripts/download_tinymol_dataset.py
 ```
 
-To fine-tune from the LAC checkpoint, use
+Fine-tuning requires a separately obtained trusted checkpoint; weights are not
+bundled in this fork. To fine-tune from a LAC checkpoint, use
 ```bash
-python scripts/transferable.py -d <subdirectory of ./data> -c checkpoints/lac/lac.chkpt  --discard-sampler-state -n <number of training steps> -w <output directory>
+python scripts/transferable.py -d <subdirectory of ./data> -c /path/to/lac.chkpt --discard-sampler-state -n <number of training steps> -w <output directory>
 ```
 and to train a model from scratch, use
 ```bash
@@ -138,7 +158,7 @@ If you run the same training command with the same output directory passed to `-
 
 To store fewer checkpoints, you can pass the arguments `--chkpts-fast-interval` and `--chkpts-slow-interval`.
 
-### Limitations of the provided checkpoint
+### Limitations of the upstream LAC checkpoint
 
 It is not possible to fine-tune from the LAC checkpoint on a molecule that contains a nucleus that
 is heavier than Fluorine. For such molecule, we suggest training from scratch, or pretraining 

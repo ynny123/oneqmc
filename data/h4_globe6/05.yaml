@@ -1,0 +1,25 @@
+coords:
+- - 2.3223710676964853
+  - 2.322330535028614
+  - 0.0
+- - 2.3223710676964853
+  - -2.322330535028614
+  - 0.0
+- - -2.3223710676964853
+  - 2.322330535028614
+  - 0.0
+- - -2.3223710676964853
+  - -2.322330535028614
+  - 0.0
+charges:
+- 1
+- 1
+- 1
+- 1
+charge: 0
+spin: 0
+unit: bohr
+extras:
+  theta_deg: 89.999
+  radius_bohr: 3.2843
+  geometry_source: https://github.com/n-gao/globe/blob/942feba753a0ab912c23fdebc873ff9aefeb49f6/globe/systems/__init__.py#L29
