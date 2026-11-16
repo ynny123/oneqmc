@@ -12,13 +12,15 @@ This fork provides four Orbformer-SE scratch-training examples. All start from
 random parameters with zero HF pretraining and require no pretrained checkpoint.
 Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
 for the systems, full settings, launch commands, output layout, and metrics.
+All example defaults use **seed 42**. H4 and Formamide are being rerun with this seed;
+old-seed evaluation numbers and generated results are not included.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
 | --- | --- | --- | --- | --- |
 | LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
-| H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 219 | Absolute mean energy (Ha), 200-step trailing average |
-| Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
-| Formamide BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
+| H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 42 | Absolute mean energy (Ha), 200-step trailing average |
+| Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 42 | Online EWM MARE (kcal/mol) |
+| Formamide BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 42 | Online EWM MARE (kcal/mol) |
 
 H4 energy is plotted directly without subtracting a minimum. LiCN, Ethane, and Formamide
 MARE use reference-centered relative energies; the online curves are training

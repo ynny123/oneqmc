@@ -67,8 +67,9 @@ def style_axis(ax, last_step):
     ax.set_axisbelow(True)
 
 
-def ethane_panel(ax, steps, mare):
-    ax.plot(steps, mare, color=BLUE, linewidth=1.3, label='Orbformer (scratch, seed 219)')
+def ethane_panel(ax, steps, mare, seed=None):
+    label = 'Orbformer (scratch)' if seed is None else f'Orbformer (scratch, seed {seed})'
+    ax.plot(steps, mare, color=BLUE, linewidth=1.3, label=label)
     ax.axhline(1.0, color='#757575', linestyle='--', linewidth=1,
                label=r'1 kcal mol$^{-1}$')
     ax.set_yscale('log')
@@ -83,11 +84,12 @@ def ethane_panel(ax, steps, mare):
                 textcoords='offset points', ha='right', fontsize=10, color=BLUE)
 
 
-def h4_panel(ax, steps, energy, raw_energy=None):
+def h4_panel(ax, steps, energy, raw_energy=None, seed=None):
     if raw_energy is not None:
         ax.plot(steps, raw_energy, color='#999999', linewidth=0.6, alpha=0.45,
                 label='Unsmoothed six-geometry mean')
-    ax.plot(steps, energy, color=BLUE, linewidth=1.5, label='Orbformer (scratch, seed 219)')
+    label = 'Orbformer (scratch)' if seed is None else f'Orbformer (scratch, seed {seed})'
+    ax.plot(steps, energy, color=BLUE, linewidth=1.5, label=label)
     ax.set_title(r'$\mathrm{H}_4(6)$')
     ax.set_ylabel(r'Mean energy ($E_h$)')
     ax.set_xticks([0, 8000, 16000])
@@ -99,10 +101,10 @@ def h4_panel(ax, steps, energy, raw_energy=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ethane-run', type=Path,
-                        default=REPO / 'runs/ethane_scratch_4gpu_32k_s219/results')
+                        default=REPO / 'runs/ethane_scratch_4gpu_32k_s42/results')
     parser.add_argument('--h4-run', type=Path,
-                        default=REPO / 'runs/h4_globe6_scratch_1gpu_16k_s219/results')
-    parser.add_argument('--output-dir', type=Path, default=REPO / 'runs/analysis')
+                        default=REPO / 'runs/h4_globe6_scratch_1gpu_16k_s42/results')
+    parser.add_argument('--output-dir', type=Path, default=REPO / 'runs/analysis_seed42')
     parser.add_argument('--window', type=int, default=200)
     args = parser.parse_args()
     ethane, h4 = args.ethane_run.resolve(), args.h4_run.resolve()
@@ -133,6 +135,8 @@ def main():
     smoothed = trailing_mean(mean_energy, args.window)
     h4_config = yaml.safe_load((h4 / 'training/config.yaml').read_text())
     assert not h4_config['args']['test']
+    ethane_config = yaml.safe_load((ethane / 'training/config.yaml').read_text())
+    h4_seed, ethane_seed = h4_config['args']['seed'], ethane_config['args']['seed']
 
     write_csv(h4_output / 'h4_convergence.csv',
               ['optimizer_updates', 'mean_training_energy_Ha',
@@ -146,7 +150,7 @@ def main():
                          'font.size': 11, 'axes.linewidth': 1.05,
                          'pdf.fonttype': 42, 'ps.fonttype': 42})
     fig, ax = plt.subplots(figsize=(5.0, 3.8))
-    ethane_panel(ax, ethane_steps, mare)
+    ethane_panel(ax, ethane_steps, mare, ethane_seed)
     fig.text(0.5, 0.01, 'Training EWM estimate; not independent checkpoint evaluation.', ha='center', fontsize=8)
     fig.tight_layout(rect=[0, 0.05, 1, 1])
     save_figure(fig, ethane_output / 'mare_online')
@@ -154,7 +158,7 @@ def main():
 
     for full_range in (False, True):
         fig, ax = plt.subplots(figsize=(4.2, 3.8))
-        h4_panel(ax, h4_steps, smoothed, mean_energy if full_range else None)
+        h4_panel(ax, h4_steps, smoothed, mean_energy if full_range else None, h4_seed)
         note = f'{args.window}-step trailing mean; absolute energy in Hartree.'
         fig.text(0.5, 0.03, note, ha='center', fontsize=7.7)
         fig.text(0.5, 0.0, 'All six training geometries; no external reference energy.', ha='center', fontsize=7.7)
@@ -163,8 +167,8 @@ def main():
         plt.close(fig)
 
     fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.8))
-    ethane_panel(axes[0], ethane_steps, mare)
-    h4_panel(axes[1], h4_steps, smoothed)
+    ethane_panel(axes[0], ethane_steps, mare, ethane_seed)
+    h4_panel(axes[1], h4_steps, smoothed, seed=h4_seed)
     fig.text(0.27, 0.025, 'Online EWM MARE; not independent evaluation.', ha='center', fontsize=8)
     fig.text(0.77, 0.025, f'{args.window}-step mean; absolute energy in Hartree.', ha='center', fontsize=8)
     fig.tight_layout(rect=[0, 0.07, 1, 1])
@@ -172,11 +176,11 @@ def main():
     plt.close(fig)
 
     metadata = dict(exported_at_beijing=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(),
-        ethane=dict(steps=int(ethane_steps[-1]), final_online_MARE_kcal_per_mol=float(mare[-1]),
+        ethane=dict(seed=ethane_seed, steps=int(ethane_steps[-1]), final_online_MARE_kcal_per_mol=float(mare[-1]),
                     source=str(ethane / 'training/result.h5'), data_csv=str(mare_path),
                     data_sha256=hashlib.sha256(mare_path.read_bytes()).hexdigest(),
                     interpretation='Training EWM, reference-centered MARE; not independent evaluation.'),
-        h4=dict(steps=int(h4_steps[-1]), geometry_count=6, energy_source='metrics/E_loc/mean_elec',
+        h4=dict(seed=h4_seed, steps=int(h4_steps[-1]), geometry_count=6, energy_source='metrics/E_loc/mean_elec',
                 source=str(h4 / 'training/result.h5'), smoothing=f'trailing {args.window} optimizer updates, full windows only',
                 averaging='Equal-weight mean of the six per-geometry electron-batch means at each update.',
                 energy_unit='Hartree', energy_shift_Ha=0.0,

@@ -2,7 +2,7 @@
 
 任务为 Formamide 的 N–H 键均裂：`HCONH2 → HCONH· + H·`。输入 `data/bbmep/Formamide/00.yaml` 至 `19.yaml` 是路径上的 20 个固定核构型，每个包含 6 个原子、24 个电子（12 up / 12 down）。核坐标单位为 Å。
 
-正式配置为单节点 4 张 A100 80GB、单 Python 进程、JAX `pmap`。全局每步选取 4 个 geometry，每卡 1 个；每个 geometry 采样 256 个完整电子构型，全局 batch 为 1024。全部 20 个结构共享一套 Orbformer-SE 参数。训练目标 32,000 次全局 K-FAC 更新，seed 219；随机初始化、不加载预训练权重，HF 预训练 0 步。
+正式配置为单节点 4 张 A100 80GB、单 Python 进程、JAX `pmap`。全局每步选取 4 个 geometry，每卡 1 个；每个 geometry 采样 256 个完整电子构型，全局 batch 为 1024。全部 20 个结构共享一套 Orbformer-SE 参数。训练目标 32,000 次全局 K-FAC 更新，seed 42；随机初始化、不加载预训练权重，HF 预训练 0 步。
 
 本次先运行 32k 步较短基线；论文列出的甲酰胺多结构实验训练长度为 100k 步。
 

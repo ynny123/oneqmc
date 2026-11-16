@@ -74,7 +74,7 @@ def main():
     upstream = parse_upstream(command)
     metadata = dict(mode=args.mode, output=str(output), devices=devices,
                     global_geometry_batch=devices, electron_configurations_per_geometry=256,
-                    global_electronic_batch=devices * 256, target_global_steps=steps, seed=219,
+                    global_electronic_batch=devices * 256, target_global_steps=steps, seed=upstream.seed,
                     initialization='checkpoint_evaluation' if checkpoint else ('own_checkpoint_resume' if args.resume else 'random'),
                     checkpoint=str(checkpoint) if checkpoint else None,
                     hf_pretrain_steps=upstream.pretrain_steps,

@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+import yaml
 
 
 def main():
@@ -21,7 +22,12 @@ def main():
     if not len(rows) or not np.isfinite(mare).all() or np.any(mare < 0):
         raise ValueError('Export a finite online MARE curve covering all 20 geometries first.')
     fig, ax = plt.subplots(figsize=(6, 4))
-    ax.plot(steps, mare, label='Orbformer-SE, scratch, seed 219')
+    config_path = args.run_dir.expanduser().resolve() / 'training/config.yaml'
+    label = 'Orbformer-SE (scratch)'
+    if config_path.exists():
+        seed = yaml.safe_load(config_path.read_text())['args']['seed']
+        label = f'Orbformer-SE (scratch, seed {seed})'
+    ax.plot(steps, mare, label=label)
     ax.axhline(1, color='gray', linestyle='--', label='1 kcal/mol')
     ax.set(xlabel='Optimizer updates', ylabel='Online EWM MARE (kcal/mol)',
            title=f'Formamide: 20 geometries, snapshot through {steps[-1]} updates')

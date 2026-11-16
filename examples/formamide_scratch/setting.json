@@ -1,5 +1,5 @@
 {
-  "description": "Formamide N-H dissociation, 20 geometries, scratch Orbformer-SE, 4 A100 GPUs, global 4x256 batch, seed219",
+  "description": "Formamide N-H dissociation, 20 geometries, scratch Orbformer-SE, 4 A100 GPUs, global 4x256 batch, seed42",
   "common_args": [
     "-d",
     "bbmep/Formamide",
@@ -10,7 +10,7 @@
     "--electron-batch-size",
     "256",
     "--seed",
-    "219",
+    "42",
     "--pretrain-steps",
     "0",
     "--optimizer",
