@@ -8,6 +8,15 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
+This handoff branch adds a portable Ethane scratch-training example. Start with
+[乙烷多几何从头训练运行说明](docs/ETHANE_SCRATCH_RUNBOOK_zh.md) for installation,
+the single-device check, four-device training, resume, and MARE evaluation.
+Published experiment outputs in `experiment_results/` have been removed from
+this branch. The 20 Ethane reference energies needed by the example are retained
+as input data in `data/references/ethane_bbmep_reference_energy.csv`.
+Paper figure notebooks require the original upstream result files to reproduce
+the published figures. See [交付版本说明](docs/GITHUB_HANDOFF_zh.md).
+
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints
  - Light Atom Curriculum dataset, and other datasets referenced in the Orbformer paper
@@ -21,7 +30,7 @@ capability 8.0 or later.
 
 1. Clone this repository
 ```bash
-git clone https://github.com/microsoft/oneqmc.git
+git clone https://github.com/ynny123/oneqmc.git
 cd ./oneqmc
 ```
 
@@ -46,6 +55,10 @@ This could take several minutes to start, and can run for several hours or until
 ## Running Orbformer
 
 The main entrypoint for running wave function training and fine-tuning is `transferable.py`.
+
+For a complete Chinese walkthrough of the Ethane BBMEP scratch-training setting
+(4 devices, 20 geometries, 256 electron configurations per geometry, 32k updates),
+see [乙烷多几何从头训练运行说明](docs/ETHANE_SCRATCH_RUNBOOK_zh.md).
 
 ### Fine-tuning existing datasets
 

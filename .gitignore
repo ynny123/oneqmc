@@ -107,6 +107,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+/.runtime/
 .env
 .venv
 env/
@@ -144,3 +145,9 @@ cython_debug/
 
 # internal results dirs
 runs/
+/experiment_results/
+/results/
+/outputs/
+events.out.tfevents.*
+**/analysis/mare_online*
+**/analysis/energy_online*
