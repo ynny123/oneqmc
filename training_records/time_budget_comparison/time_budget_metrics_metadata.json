@@ -1,0 +1,239 @@
+{
+  "generated_at_utc": "2026-11-17T03:23:32.451372+00:00",
+  "time_origin": "runtime_status.started_at: GPU process start; includes initialization, equilibration and compilation; excludes scheduling wait",
+  "selection": "last completed update with timing/train_step TensorBoard wall_time <= deadline; no time or metric interpolation",
+  "completed_run_policy": "retain final metric and mark complete_before_budget; no extrapolation",
+  "metrics_are_training_diagnostics": true,
+  "provenance": [
+    {
+      "system": "LiCN",
+      "run_dir": "${REPO_DIR}_runs/licn_default_1gpu_g1_e2048_20k_s42_20261116_212025",
+      "runtime_status": "${REPO_DIR}_runs/licn_default_1gpu_g1_e2048_20k_s42_20261116_212025/results/runtime_status.json",
+      "event_files": [
+        "${REPO_DIR}_runs/licn_default_1gpu_g1_e2048_20k_s42_20261116_212025/results/training/events.out.tfevents.1794835576.t-20261116212534-fpwlj-worker-0.746.0",
+        "${REPO_DIR}_runs/licn_default_1gpu_g1_e2048_20k_s42_20261116_212025/results/training/events.out.tfevents.1794835576.t-20261116212534-fpwlj-worker-0.746.1"
+      ],
+      "metric_csv": "${REPO_DIR}_runs/licn_default_1gpu_g1_e2048_20k_s42_20261116_212025/results/analysis/mare_online.csv",
+      "metric_csv_sha256": "7751b27019616a2e697910bf89839603bf31276320aed2b43a034a491d93a749",
+      "complete_unique_step_timestamps": 20000,
+      "native_progress_log_crosschecks": [
+        {
+          "completed_updates": 1,
+          "event_minus_log_seconds": 0.28684282302856445
+        },
+        {
+          "completed_updates": 77,
+          "event_minus_log_seconds": 0.10114121437072754
+        },
+        {
+          "completed_updates": 114,
+          "event_minus_log_seconds": 0.10144257545471191
+        },
+        {
+          "completed_updates": 140,
+          "event_minus_log_seconds": 0.10442709922790527
+        },
+        {
+          "completed_updates": 276,
+          "event_minus_log_seconds": 0.09959006309509277
+        },
+        {
+          "completed_updates": 529,
+          "event_minus_log_seconds": 0.09683632850646973
+        },
+        {
+          "completed_updates": 864,
+          "event_minus_log_seconds": 0.10617589950561523
+        },
+        {
+          "completed_updates": 1482,
+          "event_minus_log_seconds": 0.09797167778015137
+        },
+        {
+          "completed_updates": 2554,
+          "event_minus_log_seconds": 0.09154057502746582
+        },
+        {
+          "completed_updates": 4859,
+          "event_minus_log_seconds": 0.10931897163391113
+        },
+        {
+          "completed_updates": 9760,
+          "event_minus_log_seconds": 0.10570788383483887
+        },
+        {
+          "completed_updates": 11482,
+          "event_minus_log_seconds": 0.10022234916687012
+        },
+        {
+          "completed_updates": 13575,
+          "event_minus_log_seconds": 0.0996859073638916
+        },
+        {
+          "completed_updates": 19260,
+          "event_minus_log_seconds": 0.12463808059692383
+        },
+        {
+          "completed_updates": 20000,
+          "event_minus_log_seconds": 0.32290148735046387
+        }
+      ]
+    },
+    {
+      "system": "H4",
+      "run_dir": "${REPO_DIR}_runs/h4_globe6_scratch_1gpu_g6_e256_16k_s42_20261117_004824",
+      "runtime_status": "${REPO_DIR}_runs/h4_globe6_scratch_1gpu_g6_e256_16k_s42_20261117_004824/results/runtime_status.json",
+      "event_files": [
+        "${REPO_DIR}_runs/h4_globe6_scratch_1gpu_g6_e256_16k_s42_20261117_004824/results/training/events.out.tfevents.1794848031.t-20261117005205-t2778-worker-0.753.0",
+        "${REPO_DIR}_runs/h4_globe6_scratch_1gpu_g6_e256_16k_s42_20261117_004824/results/training/events.out.tfevents.1794848031.t-20261117005205-t2778-worker-0.753.1"
+      ],
+      "metric_csv": "${REPO_DIR}_runs/h4_globe6_scratch_1gpu_g6_e256_16k_s42_20261117_004824/results/analysis/h4_convergence.csv",
+      "metric_csv_sha256": "529899c1a4656c1e2d7ed1dd6827da22fc561aa455f469bed61d9f7284a715fe",
+      "complete_unique_step_timestamps": 16000,
+      "native_progress_log_crosschecks": [
+        {
+          "completed_updates": 1,
+          "event_minus_log_seconds": 0.40718770027160645
+        },
+        {
+          "completed_updates": 7,
+          "event_minus_log_seconds": 0.0971229076385498
+        },
+        {
+          "completed_updates": 11,
+          "event_minus_log_seconds": 0.09479951858520508
+        },
+        {
+          "completed_updates": 16,
+          "event_minus_log_seconds": 0.09659695625305176
+        },
+        {
+          "completed_updates": 22,
+          "event_minus_log_seconds": 0.09612464904785156
+        },
+        {
+          "completed_updates": 42,
+          "event_minus_log_seconds": 0.09568285942077637
+        },
+        {
+          "completed_updates": 62,
+          "event_minus_log_seconds": 0.10657787322998047
+        },
+        {
+          "completed_updates": 71,
+          "event_minus_log_seconds": 0.08781147003173828
+        },
+        {
+          "completed_updates": 106,
+          "event_minus_log_seconds": 0.09207391738891602
+        },
+        {
+          "completed_updates": 132,
+          "event_minus_log_seconds": 0.09032893180847168
+        },
+        {
+          "completed_updates": 182,
+          "event_minus_log_seconds": 0.09285449981689453
+        },
+        {
+          "completed_updates": 248,
+          "event_minus_log_seconds": 0.09284234046936035
+        },
+        {
+          "completed_updates": 338,
+          "event_minus_log_seconds": 0.09601569175720215
+        },
+        {
+          "completed_updates": 1167,
+          "event_minus_log_seconds": 0.10094332695007324
+        },
+        {
+          "completed_updates": 1781,
+          "event_minus_log_seconds": 0.1025698184967041
+        },
+        {
+          "completed_updates": 4012,
+          "event_minus_log_seconds": 0.09869670867919922
+        },
+        {
+          "completed_updates": 13308,
+          "event_minus_log_seconds": 0.09453725814819336
+        },
+        {
+          "completed_updates": 16000,
+          "event_minus_log_seconds": 0.3298811912536621
+        }
+      ]
+    },
+    {
+      "system": "Ethane",
+      "run_dir": "${REPO_DIR}_runs/ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050",
+      "runtime_status": "${REPO_DIR}_runs/ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050/results/runtime_status.json",
+      "event_files": [
+        "${REPO_DIR}_runs/ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050/results/training/events.out.tfevents.1794814865.t-20261116154005-qrn9k-worker-0.763.0",
+        "${REPO_DIR}_runs/ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050/results/training/events.out.tfevents.1794814866.t-20261116154005-qrn9k-worker-0.763.1"
+      ],
+      "metric_csv": "${REPO_DIR}_runs/ethane_scratch_4gpu_g4_e256_32k_s219_20261116_153050/results/analysis/mare_online.csv",
+      "metric_csv_sha256": "b482b962374030a0d85c4fdedf34586ff0ce3fbd502325ed4ef49bdd5b70addf",
+      "complete_unique_step_timestamps": 32000,
+      "native_progress_log_crosschecks": [
+        {
+          "completed_updates": 1,
+          "event_minus_log_seconds": 0.3123180866241455
+        },
+        {
+          "completed_updates": 111,
+          "event_minus_log_seconds": 0.11385822296142578
+        },
+        {
+          "completed_updates": 173,
+          "event_minus_log_seconds": 0.10792660713195801
+        },
+        {
+          "completed_updates": 312,
+          "event_minus_log_seconds": 0.10065317153930664
+        },
+        {
+          "completed_updates": 641,
+          "event_minus_log_seconds": 0.10468649864196777
+        },
+        {
+          "completed_updates": 1094,
+          "event_minus_log_seconds": 0.09879040718078613
+        },
+        {
+          "completed_updates": 2091,
+          "event_minus_log_seconds": 0.1163790225982666
+        },
+        {
+          "completed_updates": 3634,
+          "event_minus_log_seconds": 0.10537075996398926
+        },
+        {
+          "completed_updates": 7334,
+          "event_minus_log_seconds": 0.7225742340087891
+        },
+        {
+          "completed_updates": 14433,
+          "event_minus_log_seconds": 0.10329389572143555
+        },
+        {
+          "completed_updates": 18808,
+          "event_minus_log_seconds": 0.10596919059753418
+        },
+        {
+          "completed_updates": 21391,
+          "event_minus_log_seconds": 0.09473776817321777
+        },
+        {
+          "completed_updates": 26558,
+          "event_minus_log_seconds": 0.09758615493774414
+        },
+        {
+          "completed_updates": 32000,
+          "event_minus_log_seconds": 0.3651132583618164
+        }
+      ]
+    }
+  ]
+}

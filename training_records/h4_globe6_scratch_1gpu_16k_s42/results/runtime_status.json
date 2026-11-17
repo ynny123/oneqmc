@@ -1,0 +1,35 @@
+{
+  "stage": "COMPLETE",
+  "mode": "train",
+  "initialization": "random",
+  "started_at": "2026-11-16T16:53:39.327997+00:00",
+  "geometry_batch": 6,
+  "electronic_batch_global": 1536,
+  "target_updates": 16000,
+  "devices": [
+    "NVIDIA A100-SXM4-80GB"
+  ],
+  "jax_version": "0.4.34",
+  "backend": "gpu",
+  "completed_updates": 16000,
+  "final_checkpoint": "${RUN_DIR}/results/training/chkpt-16000.pt",
+  "checkpoint_reload": "PASSED",
+  "changed_parameter_tensors": null,
+  "parameter_count": 3026730,
+  "finite_logged_energies": true,
+  "elapsed_seconds": 7188.457448753063,
+  "device_memory_stats": [
+    {
+      "num_allocs": 24311368,
+      "bytes_in_use": 193683712,
+      "peak_bytes_in_use": 3312078848,
+      "largest_alloc_size": 2872349184,
+      "bytes_limit": 63740805120,
+      "bytes_reserved": 0,
+      "peak_bytes_reserved": 0,
+      "largest_free_block_bytes": 0,
+      "pool_bytes": 4699717632,
+      "peak_pool_bytes": 4699717632
+    }
+  ]
+}

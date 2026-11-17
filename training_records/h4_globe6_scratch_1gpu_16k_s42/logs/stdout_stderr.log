@@ -1,0 +1,161 @@
+${PROJECT_DIR}/envs/oneqmc/bin/python ${FROZEN_CODE_DIR}/scripts/transferable.py -d h4_globe6 -a orbformer-se --orb-parameter-mode chem-pretrain --electron-batch-size 256 --seed 42 --pretrain-steps 0 --optimizer kfac --learning-rate 0.05 --damping 0.001 --norm-constraint 0.001 --n-determinants 16 --n-envelopes-per-nucleus 8 --jax-matmul-precision high --multi-system-sampler stack --mcmc metropolis --repeated-sampling-len 1 --decorr-steps 60 --max-restarts 1 --chkpts-fast-interval 101 --chkpts-slow-interval 2000 --no-autoresume --mol-batch-size 6 --train-steps 16000 --max-eq-steps 500 -w ${RUN_DIR}/results
+[2026-11-16 16:53:51,158 INFO oneqmc line 106]: Running `transferable.py` with args: Namespace(ansatz='orbformer-se', autoresume=False, chkpt=None, data_file_whitelist=None, data_json_whitelist=None, dataset='h4_globe6', decorr_steps=60, edge_feats=True, electron_batch_size=256, eq_auto_exit=False, flash_attn=True, increment_max_charge=0, increment_max_down=0, increment_max_nuc=0, increment_max_up=0, jax_matmul_precision='high', max_eq_steps=500, mcmc='metropolis', mcmc_n_block=1, mcmc_permutations=False, metric_logger='default', metric_logger_period=1, n_envelopes_per_nucleus=8, orb_parameter_mode='chem-pretrain', seed=42, workdir='${RUN_DIR}/results', n_determinants=16, train_steps=16000, chkpts_fast_interval=101, chkpts_slow_interval=2000, chkpts_steps=None, sync_sampler_state=True, clip_width=5.0, discard_sampler_state=False, increment_max_species=None, laplacian='forward', local_energy_chunk_size=None, mol_batch_size=6, repeat_single_mol=False, mcmc_pruning=True, damping=0.001, data_augmentation=[], det_penalty_weight=0.001, learning_rate=0.05, max_data_set_size=None, max_restarts=1, multi_system_sampler='stack', n_pretrain_mols=None, norm_constraint=0.001, optimizer='kfac', pretrain_equilibration=True, pretrain_learning_rate=0.001, pretrain_mode='mo', pretrain_steps=0, repeated_sampling_len=1, report_unclipped_energy=True, test=False, spring_mu=0.99, stop_early=False, convergence_criterion_period=1000, convergence_threshold=0, balance_grad=False)
+Loading molecules:   0%|          | 0/6 [00:00<?, ?it/s]${FROZEN_CODE_DIR}/data/h4_globe6/00.yaml
+${FROZEN_CODE_DIR}/data/h4_globe6/01.yaml
+${FROZEN_CODE_DIR}/data/h4_globe6/02.yaml
+${FROZEN_CODE_DIR}/data/h4_globe6/03.yaml
+${FROZEN_CODE_DIR}/data/h4_globe6/04.yaml
+${FROZEN_CODE_DIR}/data/h4_globe6/05.yaml
+Loading molecules: 100%|██████████| 6/6 [00:00<00:00, 646.75it/s]
+[2026-11-16 16:53:51,169 INFO oneqmc line 176]: Loaded dataset of 6 molecules.
+[2026-11-16 16:53:51,169 INFO oneqmc.entrypoint line 153]: ModelDimensions(max_nuc=4, max_up=2, max_down=2, max_charge=1, max_species=1)
+[2026-11-16 16:53:52,483 DEBUG oneqmc.train line 158]: Initialising Ansatz parameters
+[2026-11-16 16:54:13,389 INFO oneqmc.train line 163]: Number of model parameters: 3026730
+[2026-11-16 16:54:13,584 DEBUG oneqmc.train line 232]: Building training dataset
+[2026-11-16 16:54:13,585 INFO oneqmc.train line 236]: Initialising and preparing sampler
+[2026-11-16 16:55:40,154 INFO oneqmc.train line 249]: Start training
+INFO:absl:==================================================
+INFO:absl:Graph parameter registrations:
+INFO:absl:{'orbformer_se': {'jastrow_alphas': 'Orphan'},
+ 'orbformer_se/elec_transformer/e_encoder': {'b': 'Auto[repeated1_dense_tag_22]',
+                                             'w': 'Auto[repeated1_dense_tag_22]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/edge_scale': {'w': 'Auto[repeated2_dense_tag_21]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/keys/linear': {'w': 'Auto[repeated1_dense_tag_24]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/linear': {'w': 'Auto[repeated1_dense_tag_27]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/queries/linear': {'w': 'Auto[repeated1_dense_tag_23]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/receiver_gate/linear': {'b': 'Auto[repeated1_dense_tag_26]',
+                                                                                                   'w': 'Auto[repeated1_dense_tag_26]'},
+ 'orbformer_se/elec_transformer/transformer_block/masked_mh_self_attention/values/linear': {'w': 'Auto[repeated1_dense_tag_25]'},
+ 'orbformer_se/elec_transformer/transformer_block/transformer_dense/decoder': {'b': 'Auto[repeated1_dense_tag_28]',
+                                                                               'w': 'Auto[repeated1_dense_tag_28]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/edge_scale': {'w': 'Auto[repeated2_dense_tag_22]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/keys/linear': {'w': 'Auto[repeated1_dense_tag_30]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/linear': {'w': 'Auto[repeated1_dense_tag_33]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/queries/linear': {'w': 'Auto[repeated1_dense_tag_29]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/receiver_gate/linear': {'b': 'Auto[repeated1_dense_tag_32]',
+                                                                                                     'w': 'Auto[repeated1_dense_tag_32]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/masked_mh_self_attention/values/linear': {'w': 'Auto[repeated1_dense_tag_31]'},
+ 'orbformer_se/elec_transformer/transformer_block_1/transformer_dense/decoder': {'b': 'Auto[repeated1_dense_tag_34]',
+                                                                                 'w': 'Auto[repeated1_dense_tag_34]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/edge_scale': {'w': 'Auto[repeated2_dense_tag_23]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/keys/linear': {'w': 'Auto[repeated1_dense_tag_36]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/linear': {'w': 'Auto[repeated1_dense_tag_39]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/queries/linear': {'w': 'Auto[repeated1_dense_tag_35]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/receiver_gate/linear': {'b': 'Auto[repeated1_dense_tag_38]',
+                                                                                                     'w': 'Auto[repeated1_dense_tag_38]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/masked_mh_self_attention/values/linear': {'w': 'Auto[repeated1_dense_tag_37]'},
+ 'orbformer_se/elec_transformer/transformer_block_2/transformer_dense/decoder': {'b': 'Auto[repeated1_dense_tag_40]',
+                                                                                 'w': 'Auto[repeated1_dense_tag_40]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/edge_scale': {'w': 'Auto[repeated2_dense_tag_24]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/keys/linear': {'w': 'Auto[repeated1_dense_tag_42]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/linear': {'w': 'Auto[repeated1_dense_tag_45]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/queries/linear': {'w': 'Auto[repeated1_dense_tag_41]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/receiver_gate/linear': {'b': 'Auto[repeated1_dense_tag_44]',
+                                                                                                     'w': 'Auto[repeated1_dense_tag_44]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/masked_mh_self_attention/values/linear': {'w': 'Auto[repeated1_dense_tag_43]'},
+ 'orbformer_se/elec_transformer/transformer_block_3/transformer_dense/decoder': {'b': 'Auto[repeated1_dense_tag_46]',
+                                                                                 'w': 'Auto[repeated1_dense_tag_46]'},
+ 'orbformer_se/elec_transformer/~build_feature_matrix/en_edge_fc': {'w': 'Auto[repeated2_dense_tag_20]'},
+ 'orbformer_se/elec_transformer/~build_feature_matrix/sender_nuc_fc': {'b': 'Auto[repeated1_dense_tag_21]',
+                                                                       'w': 'Auto[repeated1_dense_tag_21]'},
+ 'orbformer_se/elec_transformer/~build_feature_matrix/spin_repr': {'embeddings': 'Auto[repeated1_dense_tag_20]'},
+ 'orbformer_se/elec_transformer/~featurize_diffs/multi_dim_linear/linear': {'w': 'Auto[repeated1_dense_tag_19]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/final_linear_creator/linear': {'w': 'Auto[repeated1_dense_tag_17]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/final_linear_creator_1/linear': {'w': 'Auto[repeated1_dense_tag_18]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/initial_nuc_feats': {'embeddings': 'Auto[repeated1_dense_tag_0]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_0]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated1_dense_tag_1]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated1_dense_tag_2]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block/mpnn_dense/decoder': {'b': 'Auto[repeated1_dense_tag_3]',
+                                                                                                    'w': 'Auto[repeated1_dense_tag_3]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_1/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_1]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_1/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated1_dense_tag_4]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_1/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated1_dense_tag_5]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_1/mpnn_dense/decoder': {'b': 'Auto[repeated1_dense_tag_6]',
+                                                                                                      'w': 'Auto[repeated1_dense_tag_6]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_2/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_2]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_2/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated1_dense_tag_7]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_2/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated1_dense_tag_8]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/nuclei_gnn/mpnn_block_2/mpnn_dense/decoder': {'b': 'Auto[repeated1_dense_tag_9]',
+                                                                                                      'w': 'Auto[repeated1_dense_tag_9]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orb_gate_down': {'b': 'Auto[repeated2_dense_tag_17]',
+                                                                         'w': 'Auto[repeated2_dense_tag_17]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orb_gate_up': {'b': 'Auto[repeated2_dense_tag_16]',
+                                                                       'w': 'Auto[repeated2_dense_tag_16]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_4]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated2_dense_tag_5]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/masked_mh_mpnn/receiver_node/linear': {'w': 'Auto[repeated1_dense_tag_10]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated2_dense_tag_6]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/masked_mh_mpnn/sender_node/linear': {'w': 'Auto[repeated1_dense_tag_11]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block/mpnn_dense/decoder': {'w': 'Auto[repeated2_dense_tag_7]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_8]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated2_dense_tag_9]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/masked_mh_mpnn/receiver_node/linear': {'w': 'Auto[repeated1_dense_tag_12]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated2_dense_tag_10]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/masked_mh_mpnn/sender_node/linear': {'w': 'Auto[repeated1_dense_tag_13]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_1/mpnn_dense/decoder': {'w': 'Auto[repeated2_dense_tag_11]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/masked_mh_mpnn/edge_message/linear': {'w': 'Auto[repeated2_dense_tag_12]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/masked_mh_mpnn/receiver/linear': {'w': 'Auto[repeated2_dense_tag_13]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/masked_mh_mpnn/receiver_node/linear': {'w': 'Auto[repeated1_dense_tag_14]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/masked_mh_mpnn/sender/linear': {'w': 'Auto[repeated2_dense_tag_14]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/masked_mh_mpnn/sender_node/linear': {'w': 'Auto[repeated1_dense_tag_15]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/mpnn_block_2/mpnn_dense/decoder': {'w': 'Auto[repeated2_dense_tag_15]'},
+ 'orbformer_se/~compute_params_from_orbital_transformer/orbital_generator/orbital_embeddings': {'w': 'Auto[repeated2_dense_tag_3]'},
+ 'orbformer_se/~get_envelope_parameters_from_orbital_transformer/multi_dim_linear/linear': {'w': 'Auto[repeated2_dense_tag_18]'},
+ 'orbformer_se/~get_envelope_parameters_from_orbital_transformer/multi_dim_linear_1/linear': {'w': 'Auto[repeated2_dense_tag_19]'},
+ 'orbformer_se/~get_exponents/se_exponents': {'embeddings': 'Auto[repeated1_dense_tag_16]'}}
+INFO:absl:==================================================
+[2026-11-16 16:56:53,961 INFO oneqmc.train line 330]: Progress: 1/16000, energy = -1.0(1.0)|-1.0(1.0)|-1.1(1.0)|-1.0(1.0)|-0.8(1.0)|-0.6(1.0)
+[2026-11-16 16:56:57,506 INFO oneqmc.train line 330]: Progress: 7/16000, energy = -1.33(8)|-1.50(8)|-1.36(5)|-1.42(5)|-1.35(11)|-1.31(12)
+[2026-11-16 16:56:59,717 INFO oneqmc.train line 330]: Progress: 11/16000, energy = -1.72(6)|-1.73(5)|-1.74(7)|-1.74(6)|-1.73(6)|-1.61(5)
+[2026-11-16 16:57:01,870 INFO oneqmc.train line 330]: Progress: 16/16000, energy = -1.884(30)|-1.894(27)|-1.900(21)|-1.892(31)|-1.875(31)|-1.82(4)
+[2026-11-16 16:57:04,468 INFO oneqmc.train line 330]: Progress: 22/16000, energy = -1.960(26)|-1.950(14)|-1.975(27)|-1.946(12)|-1.956(21)|-1.946(35)
+[2026-11-16 16:57:13,170 INFO oneqmc.train line 330]: Progress: 42/16000, energy = -1.997(13)|-1.987(9)|-1.982(10)|-1.966(6)|-1.972(6)|-1.964(11)
+[2026-11-16 16:57:21,836 INFO oneqmc.train line 330]: Progress: 62/16000, energy = -1.987(6)|-1.996(4)|-1.981(5)|-1.987(5)|-1.988(8)|-1.987(6)
+[2026-11-16 16:57:25,786 INFO oneqmc.train line 330]: Progress: 71/16000, energy = -1.992(4)|-1.9915(29)|-1.9922(29)|-1.9911(27)|-1.989(4)|-1.996(4)
+[2026-11-16 16:57:40,948 INFO oneqmc.train line 330]: Progress: 106/16000, energy = -1.9990(22)|-1.9973(21)|-1.9996(26)|-1.9976(31)|-1.9953(20)|-2.009(9)
+[2026-11-16 16:57:51,990 INFO oneqmc.train line 330]: Progress: 132/16000, energy = -1.9990(14)|-1.9973(16)|-1.9947(24)|-1.9954(15)|-1.9970(16)|-1.9969(23)
+[2026-11-16 16:58:13,416 INFO oneqmc.train line 330]: Progress: 182/16000, energy = -2.0008(11)|-2.0010(9)|-1.9979(10)|-1.9992(9)|-1.9972(9)|-1.9973(9)
+[2026-11-16 16:58:42,433 INFO oneqmc.train line 330]: Progress: 248/16000, energy = -2.0010(7)|-2.0018(7)|-1.9999(6)|-1.9987(8)|-1.9981(8)|-1.9984(9)
+[2026-11-16 16:59:21,582 INFO oneqmc.train line 330]: Progress: 338/16000, energy = -2.0022(5)|-2.0020(4)|-2.0011(4)|-2.0003(8)|-2.0010(6)|-1.9993(4)
+[2026-11-16 17:05:24,482 INFO oneqmc.train line 330]: Progress: 1167/16000, energy = -2.01666(19)|-2.01565(18)|-2.01497(20)|-2.01473(19)|-2.01394(29)|-2.01291(29)
+[2026-11-16 17:09:54,048 INFO oneqmc.train line 330]: Progress: 1781/16000, energy = -2.01684(11)|-2.01637(12)|-2.01582(14)|-2.01544(15)|-2.01483(13)|-2.01455(12)
+[2026-11-16 17:26:08,470 INFO oneqmc.train line 330]: Progress: 4012/16000, energy = -2.01728(8)|-2.01655(6)|-2.01606(6)|-2.01551(6)|-2.01518(9)|-2.01476(7)
+[2026-11-16 18:33:49,677 INFO oneqmc.train line 330]: Progress: 13308/16000, energy = -2.017429(31)|-2.01679(7)|-2.016137(31)|-2.015581(32)|-2.015348(32)|-2.015256(34)
+[2026-11-16 18:53:26,982 INFO oneqmc.train line 332]: Progress: 16000/16000, energy = -2.01742(5)|-2.016757(27)|-2.016077(33)|-2.01566(4)|-2.015436(29)|-2.015251(31)
+[2026-11-16 18:53:27,348 INFO oneqmc.train line 353]: The training has been completed!
+{
+  "stage": "COMPLETE",
+  "mode": "train",
+  "initialization": "random",
+  "started_at": "2026-11-16T16:53:39.327997+00:00",
+  "geometry_batch": 6,
+  "electronic_batch_global": 1536,
+  "target_updates": 16000,
+  "devices": [
+    "NVIDIA A100-SXM4-80GB"
+  ],
+  "jax_version": "0.4.34",
+  "backend": "gpu",
+  "completed_updates": 16000,
+  "final_checkpoint": "${RUN_DIR}/results/training/chkpt-16000.pt",
+  "checkpoint_reload": "PASSED",
+  "changed_parameter_tensors": null,
+  "parameter_count": 3026730,
+  "finite_logged_energies": true,
+  "elapsed_seconds": 7188.457448753063,
+  "device_memory_stats": [
+    {
+      "num_allocs": 24311368,
+      "bytes_in_use": 193683712,
+      "peak_bytes_in_use": 3312078848,
+      "largest_alloc_size": 2872349184,
+      "bytes_limit": 63740805120,
+      "bytes_reserved": 0,
+      "peak_bytes_reserved": 0,
+      "largest_free_block_bytes": 0,
+      "pool_bytes": 4699717632,
+      "peak_pool_bytes": 4699717632
+    }
+  ]
+}

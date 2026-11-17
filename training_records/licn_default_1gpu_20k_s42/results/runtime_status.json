@@ -1,0 +1,50 @@
+{
+  "stage": "COMPLETE",
+  "started_at": "2026-11-16T13:26:03.081301+00:00",
+  "initialization": "random",
+  "pretrained_checkpoint": null,
+  "hf_pretrain_steps": 0,
+  "gpu_count": 1,
+  "geometry_batch": 1,
+  "electron_configurations_per_geometry": 2048,
+  "electronic_batch_global": 2048,
+  "electrons_per_configuration": 16,
+  "seed": 42,
+  "target_updates": 20000,
+  "devices": [
+    "NVIDIA A100-SXM4-80GB"
+  ],
+  "jax_version": "0.4.34",
+  "command": [
+    "${FROZEN_CODE_DIR}/scripts/transferable.py",
+    "-d",
+    "licn",
+    "--train-steps",
+    "20000",
+    "-w",
+    "${RUN_DIR}/results"
+  ],
+  "max_equilibration_steps": 500,
+  "completed_updates": 20000,
+  "checkpoint_reload": "PASSED",
+  "checkpoint": "${RUN_DIR}/results/training/chkpt-20000.pt",
+  "changed_parameter_tensors": 88,
+  "finite_logged_energies": true,
+  "all_five_geometries_tested": true,
+  "parameter_count": 3030618,
+  "elapsed_seconds": 21611.686902433634,
+  "device_memory_stats": [
+    {
+      "num_allocs": 28135292,
+      "bytes_in_use": 211609088,
+      "peak_bytes_in_use": 15564548608,
+      "largest_alloc_size": 15103479808,
+      "bytes_limit": 63880937472,
+      "bytes_reserved": 0,
+      "peak_bytes_reserved": 0,
+      "largest_free_block_bytes": 0,
+      "pool_bytes": 17785946112,
+      "peak_pool_bytes": 17785946112
+    }
+  ]
+}

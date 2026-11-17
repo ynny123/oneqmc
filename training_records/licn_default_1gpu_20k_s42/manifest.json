@@ -1,0 +1,186 @@
+{
+  "system": "LiCN",
+  "seed": 42,
+  "gpu_count": 1,
+  "completed_updates": 20000,
+  "status": "COMPLETE",
+  "started_at": "2026-11-16T13:26:03.081301+00:00",
+  "elapsed_seconds": 21611.686902433634,
+  "checkpoint_reload_validation": "PASSED",
+  "weights_included": false,
+  "path_substitutions": [
+    "${RUN_DIR}",
+    "${FROZEN_CODE_DIR}",
+    "${REPO_DIR}",
+    "${PROJECT_DIR}"
+  ],
+  "files": [
+    {
+      "path": "logs/mare_export.log",
+      "bytes": 19342,
+      "sha256": "52ff7a5faf2007113c20347548bfeebdb20511b75e966f152ae5d2fe5f084d41",
+      "source_sha256": "52ff7a5faf2007113c20347548bfeebdb20511b75e966f152ae5d2fe5f084d41",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "logs/smoke.log",
+      "bytes": 16720,
+      "sha256": "d3bdb4c2c98b7da418481d4a2dc748a97b430dc38a59186845b267aa69c9c58b",
+      "source_sha256": "6870ff653132b82c243d6f96cbd786062770970484baaf77f02d4b94a9db2e81",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "logs/stdout_stderr.log",
+      "bytes": 18493,
+      "sha256": "faa7afcc8537b0ef53b03665326539a5fac6c76eb1912addaf9a22e3894bfed8",
+      "source_sha256": "6c9b59c799fa8e3f277e022d8d9b960c003a98a85624e88dc16a3276c510b80c",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/analysis/energy_online_latest.csv",
+      "bytes": 308,
+      "sha256": "2303c6e24570b1f95f76c1c8fd14a8ad94feef8d4b49740060511c03678962c5",
+      "source_sha256": "2303c6e24570b1f95f76c1c8fd14a8ad94feef8d4b49740060511c03678962c5",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/mare_online.csv",
+      "bytes": 659833,
+      "sha256": "7751b27019616a2e697910bf89839603bf31276320aed2b43a034a491d93a749",
+      "source_sha256": "7751b27019616a2e697910bf89839603bf31276320aed2b43a034a491d93a749",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/mare_online.pdf",
+      "bytes": 21902,
+      "sha256": "44c3eec59e92b991eb1f13bce635b04b804bfdbd2cec4a39f60092b81232c571",
+      "source_sha256": "44c3eec59e92b991eb1f13bce635b04b804bfdbd2cec4a39f60092b81232c571",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/mare_online.png",
+      "bytes": 114715,
+      "sha256": "4720a9055c7d69281427fb8d2c18a2a70ddd8b71e050f33a1cbcc3d745f181d8",
+      "source_sha256": "4720a9055c7d69281427fb8d2c18a2a70ddd8b71e050f33a1cbcc3d745f181d8",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/mare_online_latest.json",
+      "bytes": 386,
+      "sha256": "be61283606de25257665dbd723dfa894a2bf2d27143747d452558d9faedee12e",
+      "source_sha256": "bfd11ca5d5d95a32a3ff25f9219f95eeaed911148836d260d50c813fa54a1f5c",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/native_args.json",
+      "bytes": 1691,
+      "sha256": "4dfce7d7c416d6c96daa4e4fefe8a9171e25bb18ff0848f0e9caac30c573800a",
+      "source_sha256": "ae394e041b78a2d0437ed1549f9c6ab83527e4d6d026c9c2912685d7bccefed3",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/oneqmc_train.log",
+      "bytes": 4368,
+      "sha256": "40a80caaa93e3abfe67aae0a7957b640ed6d56e24cb91b60d9d0bf824ed9dce0",
+      "source_sha256": "35c6f34e638ec7bba4ccd28e15fbb250e06ceb7c0a12f55d2b450edc42697f74",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/runtime_status.json",
+      "bytes": 1330,
+      "sha256": "c6e4bd54a8fb678e4a23b6681e8c37055b3f565de88b8bbb1b0b04ee43e1ee90",
+      "source_sha256": "16cf4dd2d6ebf981150a05c54dbef2e1b3ec56dc403a74bbce42bf09143f6af6",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/training/config.yaml",
+      "bytes": 1564,
+      "sha256": "6cb39320c720d1d24401692488df304793194c064bb30472e1c8ecd5a3ba1896",
+      "source_sha256": "21aceaa277689c8505afc3fe5f81551a9cc10897180de13cd51402bb617a258e",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "environment-pip-freeze.txt",
+      "bytes": 1889,
+      "sha256": "0a2e45f1ba09632cba81d40f8369cc00451aa2f4bafe72887440f674359dcd07",
+      "source_sha256": "0a2e45f1ba09632cba81d40f8369cc00451aa2f4bafe72887440f674359dcd07",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "exitcode_remote.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "exitcode_smoke.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "protocol.json",
+      "bytes": 975,
+      "sha256": "15b7857c1028d8ca59028d50e19a6200252c9c4c48be7561415e0cbc4c187ac2",
+      "source_sha256": "15b7857c1028d8ca59028d50e19a6200252c9c4c48be7561415e0cbc4c187ac2",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "reference_energy.csv",
+      "bytes": 756,
+      "sha256": "e1b8d6c0899d6dd0f0f4e31c0d30bca031de8af6735a4dd1ff8b9bbfc1c8e855",
+      "source_sha256": "e1b8d6c0899d6dd0f0f4e31c0d30bca031de8af6735a4dd1ff8b9bbfc1c8e855",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "source_sha256.json",
+      "bytes": 9985,
+      "sha256": "3fa090c1b8d7cb173bde15abc98603b7c580712ae18b5eb43f584d1fa86ce7c9",
+      "source_sha256": "3fa090c1b8d7cb173bde15abc98603b7c580712ae18b5eb43f584d1fa86ce7c9",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1589,
+      "sha256": "12b829b113972f0cea4571476128d6ad15667ad7019000577ad2265b24beea3a",
+      "source_sha256": "4df7989a287ae5b2a47cce6133bffd0162038ac3a70c327d7dddbcf795b6fe0a",
+      "location": "repository",
+      "local_paths_replaced": true
+    }
+  ],
+  "publication_scope": "training logs, metric CSVs, plots, configuration, runtime and provenance metadata",
+  "raw_hdf5_included": false,
+  "tensorboard_events_included": false,
+  "excluded_file_patterns": [
+    "*.pt",
+    "*.pth",
+    "*.ckpt",
+    "*.chkpt",
+    "*.pkl",
+    "*.pickle",
+    "*.safetensors",
+    "*.h5",
+    "*.hdf5",
+    "events.out.tfevents.*"
+  ]
+}

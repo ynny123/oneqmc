@@ -14,7 +14,9 @@ Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAM
 for the systems, full settings, launch commands, output layout, and metrics.
 Ethane uses **seed 219**, matching its existing four-GPU run. LiCN and H4
 use **seed 42**.
-Generated results are not included.
+Training logs, metric CSVs, and curves for these three runs are available in
+[training_records/](training_records/README.md), totaling about 8 MB.
+Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
 | --- | --- | --- | --- | --- |
@@ -26,9 +28,11 @@ H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
 MARE use reference-centered relative energies; the online curves are training
 diagnostics rather than independent fixed-checkpoint evaluations.
 
-Only code, documentation, geometry inputs, and small reference-energy tables in
-`data/references/` are included. **Checkpoint weights (including LAC), local
-`runs/`, logs, generated curves, and published `experiment_results/` are excluded.**
+The repository includes code, documentation, geometry inputs, small reference-energy
+tables in `data/references/`, and the published records above.
+**Checkpoint weights (including LAC), HDF5 metrics, TensorBoard event files,
+local `runs/` links, platform credentials, and upstream published
+`experiment_results/` are excluded.**
 Paper figure notebooks require separately obtained upstream result files.
 See [交付版本说明](docs/GITHUB_HANDOFF_zh.md).
 

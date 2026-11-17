@@ -1,0 +1,6 @@
+geometry,reference_energy_hartree,source
+0,-100.3792953491211,https://github.com/microsoft/oneqmc/blob/46ddc5a239650672a3b9eb276b292d3326c79ad5/experiment_results/04_licn/energy.csv
+1,-100.37855529785156,https://github.com/microsoft/oneqmc/blob/46ddc5a239650672a3b9eb276b292d3326c79ad5/experiment_results/04_licn/energy.csv
+2,-100.37504577636719,https://github.com/microsoft/oneqmc/blob/46ddc5a239650672a3b9eb276b292d3326c79ad5/experiment_results/04_licn/energy.csv
+3,-100.36514282226562,https://github.com/microsoft/oneqmc/blob/46ddc5a239650672a3b9eb276b292d3326c79ad5/experiment_results/04_licn/energy.csv
+4,-100.35298156738281,https://github.com/microsoft/oneqmc/blob/46ddc5a239650672a3b9eb276b292d3326c79ad5/experiment_results/04_licn/energy.csv

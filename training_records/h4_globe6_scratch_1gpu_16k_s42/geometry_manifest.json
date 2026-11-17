@@ -1,0 +1,22 @@
+{
+  "output": "${REPO_DIR}/data/h4_globe6",
+  "unit": "bohr",
+  "radius_bohr": 3.2843,
+  "angles_deg": [
+    85.0,
+    86.0,
+    87.0,
+    88.0,
+    89.0,
+    89.999
+  ],
+  "source_commit": "942feba753a0ab912c23fdebc873ff9aefeb49f6",
+  "sha256": {
+    "00.yaml": "8954573ec35bba7e8c80693f3aae992195fc406f146530821f67c2f8204b5673",
+    "01.yaml": "4ba6ee8b9de302a066467fea7299041828bb900683992c6922054ce371b38352",
+    "02.yaml": "02adf56597cf23f7e47402aa4c385a72b9543717c564634ec7bfc8a5a5ddfc25",
+    "03.yaml": "065045c648624de0eeb22e2230ca1e02524bce7d2297abc2e89a310365cfb4ec",
+    "04.yaml": "4d1fb610f2f4ceb1bbc34f424cf868411e863b725c661e01fe16402adc7a0e9d",
+    "05.yaml": "38ad408f049f8e775ea843443b5b517fa1a727b7ea67056bc8d8bb96f4acc4ab"
+  }
+}

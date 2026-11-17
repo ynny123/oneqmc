@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "smoke": {
+    "stage": "COMPLETE",
+    "mode": "smoke",
+    "initialization": "random",
+    "started_at": "2026-11-16T16:48:34.420155+00:00",
+    "geometry_batch": 6,
+    "electronic_batch_global": 1536,
+    "target_updates": 2,
+    "devices": [
+      "NVIDIA A100-SXM4-80GB"
+    ],
+    "jax_version": "0.4.34",
+    "backend": "gpu",
+    "completed_updates": 2,
+    "final_checkpoint": "${RUN_DIR}/smoke1gpu/training/chkpt--1.pt",
+    "checkpoint_reload": "PASSED",
+    "changed_parameter_tensors": 88,
+    "parameter_count": 3026730,
+    "finite_logged_energies": true,
+    "elapsed_seconds": 144.7452084980905,
+    "device_memory_stats": [
+      {
+        "num_allocs": 8778,
+        "bytes_in_use": 206756608,
+        "peak_bytes_in_use": 3266028288,
+        "largest_alloc_size": 2872349184,
+        "bytes_limit": 63740805120,
+        "bytes_reserved": 0,
+        "peak_bytes_reserved": 0,
+        "largest_free_block_bytes": 0,
+        "pool_bytes": 4699717632,
+        "peak_pool_bytes": 4699717632
+      }
+    ]
+  },
+  "no_external_checkpoint": true,
+  "all_six_geometries_tested": true,
+  "upstream_src_unchanged": true
+}

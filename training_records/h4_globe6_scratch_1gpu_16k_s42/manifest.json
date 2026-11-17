@@ -1,0 +1,194 @@
+{
+  "system": "H4",
+  "seed": 42,
+  "gpu_count": 1,
+  "completed_updates": 16000,
+  "status": "COMPLETE",
+  "started_at": "2026-11-16T16:53:39.327997+00:00",
+  "elapsed_seconds": 7188.457448753063,
+  "checkpoint_reload_validation": "PASSED",
+  "weights_included": false,
+  "path_substitutions": [
+    "${RUN_DIR}",
+    "${FROZEN_CODE_DIR}",
+    "${REPO_DIR}",
+    "${PROJECT_DIR}"
+  ],
+  "files": [
+    {
+      "path": "logs/smoke.log",
+      "bytes": 16316,
+      "sha256": "ea1a3efa9acb7805ff56984b929f3804ff41d2ab855838ac7dfdab5564018076",
+      "source_sha256": "f10a8d5e81d36138282632a23a370573fdaf92c14e3ba19db8c8b218fe185e41",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "logs/stdout_stderr.log",
+      "bytes": 18803,
+      "sha256": "56d1d546fff8ac2017d7d4b30424e19840ac2a5eb06307506d1c8c90e6ef8ca1",
+      "source_sha256": "4eb496fd4365c60f10d4dee12ab882a30ff9bd40dba2992c11f60047aa6af945",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/analysis/energy_by_geometry.csv",
+      "bytes": 1957253,
+      "sha256": "fed97b7f675c0ce0c785e9e070524eebb5e0e1ce9bf5f0ff729c0ec8409dd978",
+      "source_sha256": "fed97b7f675c0ce0c785e9e070524eebb5e0e1ce9bf5f0ff729c0ec8409dd978",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence.csv",
+      "bytes": 705389,
+      "sha256": "529899c1a4656c1e2d7ed1dd6827da22fc561aa455f469bed61d9f7284a715fe",
+      "source_sha256": "529899c1a4656c1e2d7ed1dd6827da22fc561aa455f469bed61d9f7284a715fe",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence.pdf",
+      "bytes": 27604,
+      "sha256": "e663ee5c52a00ab10fb64aa118b6b2acc7a1aa246e4f127614643b1976e3ef4d",
+      "source_sha256": "e663ee5c52a00ab10fb64aa118b6b2acc7a1aa246e4f127614643b1976e3ef4d",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence.png",
+      "bytes": 67377,
+      "sha256": "18a5efce2f0cc19ef89fb17d62ab2c2817a2a720f9d322178518fe7c8ed86d28",
+      "source_sha256": "18a5efce2f0cc19ef89fb17d62ab2c2817a2a720f9d322178518fe7c8ed86d28",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence_fullrange.pdf",
+      "bytes": 72156,
+      "sha256": "5c0fdcd8a506f546e9159b44605585e826f8f8ca6ea36d40786f42138201de49",
+      "source_sha256": "5c0fdcd8a506f546e9159b44605585e826f8f8ca6ea36d40786f42138201de49",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence_fullrange.png",
+      "bytes": 66047,
+      "sha256": "fbc0d3a2d6c59e88d0a0cbd2f96a2278c29d7757ffc9ea120ea2c57b8788ee69",
+      "source_sha256": "fbc0d3a2d6c59e88d0a0cbd2f96a2278c29d7757ffc9ea120ea2c57b8788ee69",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/h4_convergence_metadata.json",
+      "bytes": 320,
+      "sha256": "2df2aac7dfe23278bd569af4133435568a50b8b332c1122320c6672a75300a4c",
+      "source_sha256": "e099b4a25e4c30c93e0207b990763ef785e4c52f74fa360ffd3b4afe1682f674",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/launch.json",
+      "bytes": 3653,
+      "sha256": "b8436dc849eff9c15431006cffda344c2582cd549ff73785fbf1f332ee6a3f41",
+      "source_sha256": "f73b39b94c54b923943fccfc9cf6adf08392dda26371b456282c9a76af3a2f0d",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/oneqmc_train.log",
+      "bytes": 4925,
+      "sha256": "6a3eff03ec9cee72dd1f2731ee8e4e83baf44e128b4a0cc79252c784afd9ef8a",
+      "source_sha256": "5a817361c42722b60c2f1ef9ca6a8835502ba5d1e78324adc8661c5dbad37bbe",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/runtime_status.json",
+      "bytes": 963,
+      "sha256": "3af08623058d05d8f3ed2feb1cb6a71386a025722baff4212f1064bbc65bce60",
+      "source_sha256": "328cdde7cffd58150fa73daa20eb6869bcaa864b09ecfcffd0b36b0770729074",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/training/config.yaml",
+      "bytes": 1568,
+      "sha256": "8ba033230a4753e17435afa88f10151d59b099f56e40ed83639df5d67b1deb0d",
+      "source_sha256": "4ef63dde9a0b17b3980a51474f8be7bd5a93171ce22c00d2f970a99a621d830f",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "environment-pip-freeze.txt",
+      "bytes": 1889,
+      "sha256": "0a2e45f1ba09632cba81d40f8369cc00451aa2f4bafe72887440f674359dcd07",
+      "source_sha256": "0a2e45f1ba09632cba81d40f8369cc00451aa2f4bafe72887440f674359dcd07",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "exitcode_remote.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "exitcode_smoke.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "geometry_manifest.json",
+      "bytes": 751,
+      "sha256": "343fe2a37824ac57a95c1ee79ef96443d2c0f47b02cb478607abeb82f81e58de",
+      "source_sha256": "8ce681467604c8e8eb135fe80b22519270e4a0f60e7f7fbbc188bdcf43037099",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "protocol.json",
+      "bytes": 1070,
+      "sha256": "ff2f2d3d09e7d10b11f647175eff675aeb3671a2d326d6a5260289b1354c0e34",
+      "source_sha256": "ff2f2d3d09e7d10b11f647175eff675aeb3671a2d326d6a5260289b1354c0e34",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "source_sha256.json",
+      "bytes": 10595,
+      "sha256": "7f210c9e209359afdce182bf5204f8610e688f4e8a549219f5c3e7319c55f6e8",
+      "source_sha256": "7f210c9e209359afdce182bf5204f8610e688f4e8a549219f5c3e7319c55f6e8",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1154,
+      "sha256": "6f43de8d716e627972479afd0764cec0c2c79b175157c5fc3187c29b7971bd64",
+      "source_sha256": "6cb69d3b87d3f0f451ad46e049ba2230f1564fef410b9a1115b7c7c451e8a5ac",
+      "location": "repository",
+      "local_paths_replaced": true
+    }
+  ],
+  "publication_scope": "training logs, metric CSVs, plots, configuration, runtime and provenance metadata",
+  "raw_hdf5_included": false,
+  "tensorboard_events_included": false,
+  "excluded_file_patterns": [
+    "*.pt",
+    "*.pth",
+    "*.ckpt",
+    "*.chkpt",
+    "*.pkl",
+    "*.pickle",
+    "*.safetensors",
+    "*.h5",
+    "*.hdf5",
+    "events.out.tfevents.*"
+  ]
+}

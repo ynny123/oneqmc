@@ -152,7 +152,7 @@ events.out.tfevents.*
 **/analysis/mare_online*
 **/analysis/energy_online*
 
-# Model weights and generated training artifacts are not part of this delivery.
+# Keep weights, HDF5, and TensorBoard event files out of Git.
 *.pt
 *.pth
 *.ckpt
@@ -160,3 +160,8 @@ events.out.tfevents.*
 /checkpoints/
 *.h5
 *.hdf5
+
+# Reviewed, completed-run text records and curves published intentionally.
+!/training_records/**/*.log
+!/training_records/**/analysis/mare_online*
+!/training_records/**/analysis/energy_online*

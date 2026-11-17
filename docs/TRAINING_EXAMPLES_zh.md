@@ -1,6 +1,6 @@
 # Orbformer 训练示例：LiCN / H₄ 单卡与乙烷 / 甲酰胺四卡
 
-本文按 **LiCN → H₄ → 乙烷 → 甲酰胺** 的顺序介绍四套实验的物理体系、训练设置、输出位置和主要指标。前两套作为单卡示例，乙烷和甲酰胺作为单节点四卡示例。本文中的 `runs/...` 路径均相对于仓库根目录。这些输出用于说明原机器的实验布局；GitHub 交付只包含代码、结构和参考能量输入，不包含 checkpoint、日志、评估结果文件或运行目录。
+本文按 **LiCN → H₄ → 乙烷 → 甲酰胺** 的顺序介绍四套实验的物理体系、训练设置、输出位置和主要指标。前两套作为单卡示例，乙烷和甲酰胺作为单节点四卡示例。本文中的 `runs/...` 路径均相对于仓库根目录。这些路径说明原机器的实验布局；LiCN、H₄ 和乙烷已完成运行的日志、指标 CSV 和曲线现已发布到 [`training_records/`](../training_records/README.md)，公开记录合计约 8 MB；checkpoint、HDF5、TensorBoard 事件文件、平台凭据和本机运行软链接不上传，具体内容见第 9 节。
 
 乙烷使用 **seed 219**，与已有四卡运行一致；LiCN、H₄ 和甲酰胺使用 **seed 42**。本次只重新提交 H₄ 和甲酰胺，乙烷保留已有运行。
 
@@ -59,7 +59,7 @@ H₄ 在 **1 小时 59 分 48 秒**左右完成 16,000 步，因此 2 小时、4
 
 表中小时是实际经过时间；乙烷使用四卡，1 小时约对应 4 A100 GPU·小时。这些数值是同一次完整训练计划中的时间截面，不是分别设置 1、2、4 小时目标重新训练得到的结果。
 
-本机明细为 `runs/time_budget_comparison/time_budget_metrics.csv`；同目录的 `time_budget_metrics_metadata.json` 记录源文件、计时口径及训练日志时间戳交叉校验，`licn_step_wall_times.csv`、`h4_step_wall_times.csv` 和 `ethane_step_wall_times.csv` 保留完整步数与时间映射。这些运行产物不随 GitHub 版本交付，仓库仅保留本节汇总。
+完整明细已发布为 [`time_budget_metrics.csv`](../training_records/time_budget_comparison/time_budget_metrics.csv)；同目录的 [`time_budget_metrics_metadata.json`](../training_records/time_budget_comparison/time_budget_metrics_metadata.json) 记录源文件、计时口径及训练日志时间戳交叉校验，`licn_step_wall_times.csv`、`h4_step_wall_times.csv` 和 `ethane_step_wall_times.csv` 保留完整步数与时间映射。本机原始导出位置仍为 `runs/time_budget_comparison/`。
 
 ## 2. LiCN：单卡、多几何、默认 batch 的从头训练
 
@@ -216,7 +216,7 @@ CH₃CH₃ → CH₃CH₂· + H·
 
 使用 **单 Python 进程、JAX `pmap`、4 张 A100 80GB**。全局每步处理 **4 个 geometry，每卡 1 个，每个 256 个电子构型**，全局为 **1024** 个构型。K-FAC 训练 **32,000 次全局更新**，seed **219**。共享参数在卡间同步；不是四个相互独立的训练任务。
 
-约 5 次更新覆盖一轮 20 个结构，每个 geometry 平均参与约 6400 次更新。乙烷模板保持 seed 219，与已有完成运行一致；本次不重新提交乙烷。下面列出本机已有运行的输出位置，运行产物不随 GitHub 仓库交付。
+约 5 次更新覆盖一轮 20 个结构，每个 geometry 平均参与约 6400 次更新。乙烷模板保持 seed 219，与已有完成运行一致；本次不重新提交乙烷。下面列出本机已有运行的输出位置；对应公开副本位于 `training_records/ethane_scratch_4gpu_32k_s219/`，原始大文件下载方式见第 9 节。
 
 在相同环境中启动新实验：
 
@@ -454,4 +454,26 @@ tensorboard --logdir runs/licn_default_1gpu_20k_s42/results/training \
 
 训练完成应同时核对目标步数、`runtime_status.json` 的 `COMPLETE`、正常退出码 0，以及目标步数 checkpoint 的重载验证。`chkpt--1.pt` 是滚动保存的快速 checkpoint，文件名不表示训练只有 1 步；其实际步数保存在文件内部。
 
-以上路径描述当前机器的已有实验；`runs/` 被 Git 忽略，克隆代码库不会自动得到这些日志、图片和 checkpoint。迁移时应单独复制所需实验目录，或用新输出目录重新运行。四套训练与后处理之间的指标口径，以本文第 3、6 节和对应元数据文件为准。
+以上 `runs/` 路径描述当前机器的已有实验，仍被 Git 忽略。克隆代码库可获得三个已完成算例在 `training_records/` 中的日志、CSV、曲线和配置；HDF5、TensorBoard 原始记录与 checkpoint 仅保留在本机，不公开。公开记录和本机目录的对应关系见第 9 节。四套训练与后处理之间的指标口径，以本文第 3、6 节和对应元数据文件为准。
+
+## 9. GitHub 上的训练记录
+
+本次公开 **LiCN seed 42（20,000 步）**、**H₄ seed 42（16,000 步）**和**乙烷 seed 219（32,000 步）**三个已完成算例的日志与指标。统一入口为 [`training_records/README.md`](../training_records/README.md)，所有公开文件合计约 **8 MB**，单个文件不足 **2 MB**，可直接在 GitHub 查看或随仓库克隆下载。
+
+| 文件类别 | GitHub 位置 | 用途 |
+| --- | --- | --- |
+| 训练日志、退出码与运行状态 | `training_records/<算例>/results/`、`logs/` | 核对训练完成状态、步数和报错记录 |
+| 完整 MARE / 能量 CSV 与 PNG/PDF 曲线 | `training_records/<算例>/results/analysis/` | 查看完整训练曲线及逐结构能量；H₄ 使用绝对能量 |
+| 实际配置与环境信息 | `results/training/config.yaml`、`protocol.json`、`environment-pip-freeze.txt`、`source_sha256.json` | 核对实际 seed、batch、训练计划和冻结代码版本 |
+| 1/2/4 小时指标及完整步数时间映射 | `training_records/time_budget_comparison/` | 追溯第 1.1 节的数据选择 |
+| 每文件 SHA-256 | 各算例 `manifest.json`、`training_records/SHA256SUMS` | 核对公开文件完整性及路径替换情况 |
+
+从仓库根目录校验公开记录：
+
+```bash
+(cd training_records && sha256sum -c SHA256SUMS)
+```
+
+公开文本保留全部指标数值，只将机器绝对路径改为 `${RUN_DIR}`、`${FROZEN_CODE_DIR}`、`${REPO_DIR}`、`${PROJECT_DIR}` 等占位符。它们是历史记录，不能直接将其中旧工作目录或 checkpoint 路径作为新的启动命令。日志中仍可能保留原 checkpoint 文件名及重载验证结论，这不表示权重文件已发布。
+
+**checkpoint、模型权重、HDF5（`.h5` / `.hdf5`）、TensorBoard 事件文件、包含这些文件的压缩包、平台提交回执和凭据均不上传。** 这些原始大文件和模型参数仍保留在本机。本说明前文中的 HDF5 / TensorBoard 检查与重新导出命令针对本机原始运行目录；查看 GitHub 已发布的 CSV、曲线和日志无需下载原始大文件。`time_budget_comparison/export_time_budgets.py` 的重新计算同样需要本机原始数据，已导出的逐步时间映射可以直接查看。

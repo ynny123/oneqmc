@@ -1,0 +1,9 @@
+{
+  "updated_at": "2026-11-16T19:26:18.106671+00:00",
+  "last_step": 19999,
+  "completed_updates": 20000,
+  "mare_kcal_mol": 0.11681365966796875,
+  "kind": "online EWM diagnostic; latest observation per geometry; not independent evaluation",
+  "reference_source": "official experiment_results/04_licn/energy.csv Reference rows",
+  "source_h5": "${RUN_DIR}/results/training/result.h5"
+}

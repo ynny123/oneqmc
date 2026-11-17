@@ -1,0 +1,12 @@
+{
+  "completed_updates": 32000,
+  "MARE_online_EWM_kcal_per_mol": 0.5932363764964546,
+  "geometry_count": 20,
+  "source": "${RUN_DIR}/results/training/result.h5",
+  "reference": "${REPO_DIR}/experiment_results/02_bbmep/BBMEP_reference_energy.csv",
+  "reference_sha256": "c3483de6ce1f817461e75c38ce180965913097be2bcea7561c34ab13a74e91b4",
+  "formula": "627.5 * mean(abs((E_EWM - mean(E_EWM)) - (E_ref - mean(E_ref))))",
+  "interpretation": "Training EWM diagnostic, NOT independent fixed-checkpoint evaluation.",
+  "refresh": "Snapshot; rerun this script to refresh the export.",
+  "exported_at_beijing": "2026-11-16T20:49:05.993261+08:00"
+}

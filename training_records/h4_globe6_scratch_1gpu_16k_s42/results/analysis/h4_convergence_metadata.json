@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "steps": 16000,
+  "geometry_count": 6,
+  "energy_unit": "Hartree",
+  "energy_shift_Ha": 0.0,
+  "smoothing": "trailing 200 updates, full windows only",
+  "final_smoothed_energy_Ha": -2.0161564443508904,
+  "energy_source": "metrics/E_loc/mean_elec",
+  "source": "${RUN_DIR}/results/training/result.h5"
+}
