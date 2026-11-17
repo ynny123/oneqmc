@@ -101,10 +101,10 @@ def h4_panel(ax, steps, energy, raw_energy=None, seed=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ethane-run', type=Path,
-                        default=REPO / 'runs/ethane_scratch_4gpu_32k_s42/results')
+                        default=REPO / 'runs/ethane_scratch_4gpu_32k_s219/results')
     parser.add_argument('--h4-run', type=Path,
                         default=REPO / 'runs/h4_globe6_scratch_1gpu_16k_s42/results')
-    parser.add_argument('--output-dir', type=Path, default=REPO / 'runs/analysis_seed42')
+    parser.add_argument('--output-dir', type=Path, default=REPO / 'runs/analysis_ethane_s219_h4_s42')
     parser.add_argument('--window', type=int, default=200)
     args = parser.parse_args()
     ethane, h4 = args.ethane_run.resolve(), args.h4_run.resolve()

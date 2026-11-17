@@ -1,4 +1,4 @@
-"""Verify the public seed42 defaults and the labels attached to exported data."""
+"""Verify each example seed default and the labels attached to exported data."""
 import csv
 import json
 from pathlib import Path
@@ -13,17 +13,17 @@ import yaml
 REPO = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize('folder,extra', [
-    ('h4_rectangle', []), ('formamide_scratch', ['--devices', '4']),
-    ('ethane_scratch', ['--devices', '4']),
+@pytest.mark.parametrize('folder,extra,seed', [
+    ('h4_rectangle', [], 42), ('formamide_scratch', ['--devices', '4'], 42),
+    ('ethane_scratch', ['--devices', '4'], 219),
 ])
-def test_example_seed_and_dry_run_metadata(folder, extra, tmp_path):
+def test_example_seed_and_dry_run_metadata(folder, extra, seed, tmp_path):
     output = tmp_path / folder
     result = subprocess.run([sys.executable, str(REPO / f'examples/{folder}/run.py'),
                              '--mode', 'train', '--output', str(output), '--dry-run', *extra],
                             capture_output=True, text=True, check=True)
     launch = json.loads(result.stdout.split('\n', 1)[1])
-    assert launch['seed'] == launch['upstream_args']['seed'] == 42
+    assert launch['seed'] == launch['upstream_args']['seed'] == seed
     assert launch['upstream_args']['chkpt'] is None
     assert launch['upstream_args']['pretrain_steps'] == 0
     assert not output.exists()

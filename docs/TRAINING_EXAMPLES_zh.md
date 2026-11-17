@@ -2,7 +2,7 @@
 
 本文按 **LiCN → H₄ → 乙烷 → 甲酰胺** 的顺序介绍四套实验的物理体系、训练设置、输出位置和主要指标。前两套作为单卡示例，乙烷和甲酰胺作为单节点四卡示例。本文中的 `runs/...` 路径均相对于仓库根目录。这些输出用于说明原机器的实验布局；GitHub 交付只包含代码、结构和参考能量输入，不包含 checkpoint、日志、评估结果或运行目录。
 
-所有模板默认使用 **seed 42**。本次只重新提交 H₄ 和甲酰胺；旧种子的评估数字和默认结果路径已从本说明移除。
+乙烷使用 **seed 219**，与已有四卡运行一致；LiCN、H₄ 和甲酰胺使用 **seed 42**。本次只重新提交 H₄ 和甲酰胺，乙烷保留已有运行。
 
 四套实验都使用完整的 **Orbformer-SE 从头训练**：随机初始化、不加载 LAC 或其他外部 checkpoint、Hartree–Fock（HF）预训练为 0 步。训练通过变分蒙特卡洛（VMC）最小化电子能量；LiCN、乙烷和甲酰胺的参考能量仅用于统计误差，不作为监督标签。
 
@@ -18,11 +18,11 @@
 | 每个 geometry 的电子构型数 | **2048** | **256** | **256** | **256** |
 | 每步全局电子构型数 | 2048 | 1536 | 1024 | 1024 |
 | 目标参数更新数 | **20,000** | **16,000** | **32,000** | **32,000** |
-| seed | 42 | 42 | 42 | 42 |
+| seed | 42 | 42 | 219 | 42 |
 | 模型参数量 | 3,030,618 | 3,026,730 | 3,029,650 | 3,031,714 |
 | 阶段 checkpoint 间隔 | 10,000 步 | 2000 步 | 8000 步 | 8000 步 |
 | 主要观察指标 | **MARE 曲线** | **能量收敛曲线** | **MARE 曲线** | **MARE 曲线** |
-| seed 42 运行范围 | 已有任务，以实际状态为准 | 本次重新提交 | 仅更新模板，本次不重跑 | 本次重新提交 |
+| 运行范围 | 已有 seed 42 任务，以实际状态为准 | 本次 seed 42 重新提交 | 保留已完成的 seed 219 运行 | 本次 seed 42 重新提交 |
 
 **geometry 是固定的一组核坐标；电子构型是一组完整的电子坐标。** 例如 LiCN 的 `1×2048` 表示每次更新选取 1 个核构型，对该结构采样 2048 组、每组含 16 个电子的坐标。数据集仍有 5 个 geometry，并非只训练其中一个。本文步数均为全局优化器更新次数，四卡的 32k 步不再乘以 4。
 
@@ -198,9 +198,9 @@ CH₃CH₃ → CH₃CH₂· + H·
 
 ### 4.2 训练设置与启动
 
-使用 **单 Python 进程、JAX `pmap`、4 张 A100 80GB**。全局每步处理 **4 个 geometry，每卡 1 个，每个 256 个电子构型**，全局为 **1024** 个构型。K-FAC 训练 **32,000 次全局更新**，seed **42**。共享参数在卡间同步；不是四个相互独立的训练任务。
+使用 **单 Python 进程、JAX `pmap`、4 张 A100 80GB**。全局每步处理 **4 个 geometry，每卡 1 个，每个 256 个电子构型**，全局为 **1024** 个构型。K-FAC 训练 **32,000 次全局更新**，seed **219**。共享参数在卡间同步；不是四个相互独立的训练任务。
 
-约 5 次更新覆盖一轮 20 个结构，每个 geometry 平均参与约 6400 次更新。乙烷模板的默认 seed 同步改为 42；本次不重新提交乙烷，下面列出的是新运行完成后应生成的输出。
+约 5 次更新覆盖一轮 20 个结构，每个 geometry 平均参与约 6400 次更新。乙烷模板保持 seed 219，与已有完成运行一致；本次不重新提交乙烷。下面列出本机已有运行的输出位置，运行产物不随 GitHub 仓库交付。
 
 在相同环境中启动新实验：
 
@@ -214,7 +214,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python examples/ethane_scratch/run.py \
 
 ### 4.3 当前输出位置与应看指标
 
-实验根目录：`runs/ethane_scratch_4gpu_32k_s42/`（`runs/ethane_scratch_4gpu_32k_s42/`，本机输出）。
+实验根目录：`runs/ethane_scratch_4gpu_32k_s219/`（`runs/ethane_scratch_4gpu_32k_s219/`，本机输出）。
 
 | 文件或目录（相对于该根目录） | 内容与用途 |
 | --- | --- |
@@ -229,13 +229,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python examples/ethane_scratch/run.py \
 | `results/analysis/energy_online_latest.csv` | 每个 geometry 的训练 EWM 能量、EWM 误差估计、参考能量及居中相对误差 |
 | `results/exitcode.txt` | 正常退出码 0；位置与两个单卡任务不同 |
 
-**主要看 MARE 曲线是否下降、后期是否稳定，以及是否接近或低于图中 1 kcal/mol 的参考线。** 此处不再列出旧种子的 MARE 结果；seed 42 的误差应在对应任务实际完成后计算。这是训练 EWM 指标；若要报告固定模型的最终精度，应按乙烷运行说明额外进行固定 checkpoint 的独立采样评估。
+**主要看 MARE 曲线是否下降、后期是否稳定，以及是否接近或低于图中 1 kcal/mol 的参考线。** 对应乙烷 seed 219 运行，查看下述路径中的曲线与 CSV。这是训练 EWM 指标；若要报告固定模型的最终精度，应按乙烷运行说明额外进行固定 checkpoint 的独立采样评估。
 
 该 CSV 的横轴列为 `optimizer_updates`，纵轴列为 `MARE_online_EWM_kcal_per_mol`，与 LiCN 的列名不同。乙烷导出器生成当前快照，默认不会自动常驻刷新；应核对 CSV 的最后步数与对应新运行的 HDF5 一致。需要重新导出时，从仓库根目录执行：
 
 ```bash
 python examples/ethane_scratch/mare.py \
-  --run-dir runs/ethane_scratch_4gpu_32k_s42/results --kind online
+  --run-dir runs/ethane_scratch_4gpu_32k_s219/results --kind online
 ```
 
 ## 5. 甲酰胺（Formamide）：四卡、20 点 N–H 断键路径
@@ -369,7 +369,7 @@ python examples/h4_rectangle/plot_energy.py \
 
 输出 `analysis/h4_convergence.csv`、`energy_by_geometry.csv`、`h4_convergence.png/.pdf`、`h4_convergence_fullrange.png/.pdf` 和指标元数据。绝对能量单位为 Ha，不减最低能量，图例从对应运行的 `training/config.yaml` 读取 seed。
 
-将来有完成的 seed 42 乙烷运行后，先导出它的 MARE，再运行 `python examples/plot_training_curves.py --window 200`，可生成乙烷 / H₄ 并排图到 `runs/analysis_seed42/`。联合脚本要求两项运行均完成，本次没有提交新的乙烷任务。
+H₄ seed 42 运行完成后，先导出已有乙烷 seed 219 运行的 MARE，再运行 `python examples/plot_training_curves.py --window 200`，可生成乙烷 / H₄ 并排图到 `runs/analysis_ethane_s219_h4_s42/`。联合脚本要求两项运行均完成，图例分别读取各自实际 seed；本次没有提交新的乙烷任务。
 
 ### 7.3 甲酰胺：绘制自动导出的 MARE
 
@@ -395,7 +395,7 @@ readlink -f runs/formamide_scratch_4gpu_32k_s42
 | --- | --- |
 | `runs/licn_default_1gpu_20k_s42` | 已有 LiCN seed 42 实验 |
 | `runs/h4_globe6_scratch_1gpu_16k_s42` | 本次 H₄ seed 42 从头训练 |
-| `runs/ethane_scratch_4gpu_32k_s42` | 乙烷新模板的建议输出目录，本次不提交 |
+| `runs/ethane_scratch_4gpu_32k_s219` | 已完成的乙烷 seed 219 运行，本次不重跑 |
 | `runs/formamide_scratch_4gpu_32k_s42` | 本次甲酰胺 seed 42 从头训练 |
 
 实验根目录的 `code/`、`protocol.json`、`source_sha256.json` 供核对实际输入和源码；`results/training/config.yaml` 是已解析的训练参数，修改仓库中的 `setting.json` 不会改变已启动的冻结任务。`runtime_status.json` 主要记录阶段，训练时不会逐步刷新已完成更新数。
@@ -414,7 +414,7 @@ from pathlib import Path
 import h5py
 for name in ('licn_default_1gpu_20k_s42',
              'h4_globe6_scratch_1gpu_16k_s42',
-             'ethane_scratch_4gpu_32k_s42',
+             'ethane_scratch_4gpu_32k_s219',
              'formamide_scratch_4gpu_32k_s42'):
     source = Path('runs') / name / 'results/training/result.h5'
     if not source.exists():

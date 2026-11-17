@@ -20,7 +20,7 @@ CH3CH3 → CH3CH2· + H·
 | --- | --- |
 | 数据集 | `data/bbmep/Ethane/00.yaml` 至 `19.yaml` |
 | 模型 | `orbformer-se`，3,029,650 个参数 |
-| 初始状态 | 随机初始化，seed 42 |
+| 初始状态 | 随机初始化，seed 219 |
 | 外部 checkpoint | 不加载 |
 | Hartree–Fock 预训练 | 0 步 |
 | 参数共享方式 | `--orb-parameter-mode chem-pretrain` |
@@ -69,7 +69,7 @@ oneqmc/
 
 结构 YAML 中的核坐标单位为 Å（`unit: angstrom`），加载时由上游转换为内部原子单位。不要手工再次转换坐标。
 
-`runs/ethane_scratch_4gpu_32k_s42` 是 seed 42 新实验的建议目录；本轮只同步乙烷模板默认值，并未重新提交乙烷任务。接收方按本文的 `examples/ethane_scratch/run.py` 启动新实验，它调用当前仓库的 `scripts/transferable.py`，不依赖原机器的软链接。
+`runs/ethane_scratch_4gpu_32k_s219` 是本机已完成的 seed 219 乙烷实验入口；模板保持相同 seed，本轮不重新提交乙烷任务。重新从头训练时，请使用新的输出目录，避免覆盖已有结果。接收方按本文的 `examples/ethane_scratch/run.py` 启动新实验，它调用当前仓库的 `scripts/transferable.py`，不依赖原机器的软链接。
 
 ## 3 环境准备
 
@@ -172,7 +172,7 @@ cat "$SMOKE_DIR/runtime_status.json"
 先预览并检查命令，不初始化设备、不启动训练，也不创建实验输出目录：
 
 ```bash
-export TRAIN_DIR="$ONEQMC_WORK_ROOT/runs/ethane_scratch_4gpu_32k_s42"
+export TRAIN_DIR="$ONEQMC_WORK_ROOT/runs/ethane_scratch_4gpu_32k_s219"
 
 python examples/ethane_scratch/run.py \
   --mode train --devices 4 --output "$TRAIN_DIR" --dry-run
@@ -200,7 +200,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python examples/ethane_scratch/run.py \
 timeout --signal=TERM --kill-after=120s 8h
 ```
 
-`run.py` 本身不设置超时。8 小时是旧包装层使用过的保护值；自行运行时应按实际目标和机器设置。seed 42 的实际耗时请在新任务完成编译后，按 TensorBoard 中测得的步速估算，另计初始化和平衡时间。
+`run.py` 本身不设置超时。8 小时是旧包装层使用过的保护值；自行运行时应按实际目标和机器设置。实际耗时请在目标机器完成编译后，按 TensorBoard 中测得的步速估算，另计初始化和平衡时间。
 
 ## 6 与当前配置对应的原生训练命令
 
@@ -214,7 +214,7 @@ python scripts/transferable.py \
   --mol-batch-size 4 \
   --electron-batch-size 256 \
   --train-steps 32000 \
-  --seed 42 \
+  --seed 219 \
   --pretrain-steps 0 \
   --optimizer kfac \
   --learning-rate 0.05 \
@@ -240,7 +240,7 @@ python scripts/transferable.py \
 ```text
 $ONEQMC_WORK_ROOT/
 ├── logs/ethane_train.log          标准输出、错误和编译日志
-└── runs/ethane_scratch_4gpu_32k_s42/
+└── runs/ethane_scratch_4gpu_32k_s219/
     ├── launch.json               实际启动命令、全部参数和数据哈希
     ├── runtime_status.json       初始化、运行、完成或失败阶段
     ├── oneqmc_train.log          上游训练日志

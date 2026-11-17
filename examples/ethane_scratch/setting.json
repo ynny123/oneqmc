@@ -10,7 +10,7 @@
     "--electron-batch-size",
     "256",
     "--seed",
-    "42",
+    "219",
     "--pretrain-steps",
     "0",
     "--optimizer",
