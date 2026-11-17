@@ -8,12 +8,12 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
-This fork provides four Orbformer-SE scratch-training examples. All start from
+This README introduces three Orbformer-SE scratch-training examples. All start from
 random parameters with zero HF pretraining and require no pretrained checkpoint.
 Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
 for the systems, full settings, launch commands, output layout, and metrics.
-Ethane uses **seed 219**, matching its existing four-GPU run. LiCN, H4, and
-Formamide use **seed 42**; H4 and Formamide are being rerun with this seed.
+Ethane uses **seed 219**, matching its existing four-GPU run. LiCN and H4
+use **seed 42**.
 Generated results are not included.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
@@ -21,9 +21,8 @@ Generated results are not included.
 | LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
 | H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 42 | Absolute mean energy (Ha), 200-step trailing average |
 | Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
-| Formamide BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 42 | Online EWM MARE (kcal/mol) |
 
-H4 energy is plotted directly without subtracting a minimum. LiCN, Ethane, and Formamide
+H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
 MARE use reference-centered relative energies; the online curves are training
 diagnostics rather than independent fixed-checkpoint evaluations.
 
@@ -75,10 +74,9 @@ documented in the [Chinese runbook](docs/ETHANE_SCRATCH_RUNBOOK_zh.md#3-环境�
 
 The main entrypoint for running wave function training and fine-tuning is `transferable.py`.
 
-The [four-example guide](docs/TRAINING_EXAMPLES_zh.md) covers both single-GPU
-examples and the two four-GPU examples. The [Formamide guide](examples/formamide_scratch/README.md)
-provides its launch, resume, and automatic MARE-export commands. The [H4 guide](examples/h4_rectangle/README.md)
-also documents the six-rectangle geometry convention.
+The [training-example guide](docs/TRAINING_EXAMPLES_zh.md) covers LiCN and H4
+single-GPU training and Ethane four-GPU training. The
+[H4 guide](examples/h4_rectangle/README.md) documents the six-rectangle geometry convention.
 
 For a complete Chinese walkthrough of the Ethane BBMEP scratch-training setting
 (4 devices, 20 geometries, 256 electron configurations per geometry, 32k updates),
