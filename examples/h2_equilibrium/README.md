@@ -23,9 +23,9 @@ ORBFORMER_PICKLE_LOADING=1 python scripts/transferable.py \
   -n 1000 -w runs/h2_equilibrium_eval
 ~~~
 
-每次运行使用新的 `-w` 目录。训练曲线用 `training/result.h5` 的 `metrics/E_loc/mean/ewm`，原始批平均能量在 `metrics/E_loc/mean_elec`。原生训练还会把绝对误差 `abs(E_EWM - E_ref)`（Ha）写入 `metrics/E_ewm_vs_ref/mae`。画能量曲线时可叠加参考线，也可画有符号误差 `(E - E_ref) × 1000`（mHa）。单个结构的居中 MARE 恒为零。
+每次运行使用新的 `-w` 目录。训练曲线用 `training/result.h5` 的 `metrics/E_loc/mean/ewm`，原始批平均能量在 `metrics/E_loc/mean_elec`。原生训练还会把绝对误差 `abs(E_EWM - E_ref)`（Ha）写入 `metrics/E_ewm_vs_ref/mae`。画能量曲线时可叠加参考线，也可画有符号误差 `(E - E_ref) × 1000`（mHa）。
 
-独立评估结束后，对全部批平均局部能量取 Huber 稳健均值，再计算绝对误差。
+独立评估结束后，对全部批平均局部能量取 Huber 稳健均值，再计算绝对误差 `abs(E - E_ref) × 1000`（mHa）。**绝对误差越小越好，目标是低于 1 kcal/mol（约 1.59 mHa）的化学精度阈值。** [单位换算](https://cccbdb.nist.gov/hartreex.asp)
 
 ~~~bash
 python - <<'PY'
