@@ -8,8 +8,8 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
-This README introduces three Orbformer-SE scratch-training examples. All start from
-random parameters with zero HF pretraining and require no pretrained checkpoint.
+This README introduces three Orbformer-SE scratch-training examples and a small H2
+benchmark. All start from random parameters with zero HF pretraining.
 Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
 for the systems, full settings, launch commands, output layout, and metrics.
 Ethane uses **seed 219**, matching its existing four-GPU run. LiCN and H4
@@ -20,6 +20,7 @@ Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
 | --- | --- | --- | --- | --- |
+| [H2 equilibrium benchmark](examples/h2_equilibrium/README.md), 1 geometry | 1 | **1 × 256** | 2,000 / 42 | Absolute energy error (mHa) |
 | LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
 | H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 42 | Absolute mean energy (Ha), 200-step trailing average |
 | Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
@@ -27,6 +28,11 @@ Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
 MARE use reference-centered relative energies; the online curves are training
 diagnostics rather than independent fixed-checkpoint evaluations.
+
+The H2 benchmark has two electrons at a fixed bond length of **1.4011 bohr**.
+It compares the evaluated total energy against **−1.1744759314 Ha**. The
+[H2 walkthrough](examples/h2_equilibrium/README.md) includes training, independent
+evaluation, and absolute error reporting commands.
 
 The repository includes code, documentation, geometry inputs, small reference-energy
 tables in `data/references/`, and the published records above.

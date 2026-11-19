@@ -1,0 +1,11 @@
+coords:
+  - [0.0, 0.0, -0.70055]
+  - [0.0, 0.0, 0.70055]
+charges: [1, 1]
+charge: 0
+spin: 0
+unit: bohr
+extras:
+  reference_energy: -1.1744759314002167
+  accurate_absolute_energy: true
+  reference_energy_source: https://arxiv.org/abs/1007.0322
