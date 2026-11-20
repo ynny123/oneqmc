@@ -44,6 +44,26 @@ local `runs/` links, platform credentials, and upstream published
 Paper figure notebooks require separately obtained upstream result files.
 See [交付版本说明](docs/GITHUB_HANDOFF_zh.md).
 
+## H₂ and boron training results
+
+Each run completed **10,000 updates** from random initialization on one A100 80 GB with 1,024 electronic configurations per update and seed 42.
+
+| System | Total training wall time | Update loop wall time | Final training energy (Ha) | Final absolute error (mHa) |
+| --- | ---: | ---: | ---: | ---: |
+| H₂ at 1.4011 bohr | **1 h 03 min 06 s** | 1 h 01 min 36 s | −1.1744472 | 0.029 |
+| Neutral boron (B) | **1 h 08 min 01 s** | 1 h 06 min 23 s | −24.653595 | 0.275 |
+
+Total wall time is measured from the training entry in the OneQMC log through completion. It includes model initialization, sampler equilibration, and JIT compilation. The update-loop time starts at the log entry `Start training` and includes compilation of the first update. Queue time and independent evaluation are outside both intervals.
+
+The VMC objective is energy minimization. The loss trend below uses the exponential moving average (EWM) of the sampled mean local energy. The absolute-error curves compare that same EWM energy with the reference for each system.
+
+| System | VMC energy (loss trend) | Absolute energy error |
+| --- | --- | --- |
+| H₂ | ![H₂ VMC energy over 10,000 training steps](training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/energy_online.png) | ![H₂ absolute energy error over 10,000 training steps](training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
+| B | ![B VMC energy over 10,000 training steps](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/energy_online.png) | ![B absolute energy error over 10,000 training steps](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
+
+Download the full per-step data for [H₂](training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) and [B](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv).
+
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints
  - Light Atom Curriculum dataset, and other datasets referenced in the Orbformer paper
