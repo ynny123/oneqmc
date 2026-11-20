@@ -2,6 +2,16 @@
 
 中性单重态 H₂，核间距 **1.4011 bohr**，共两个电子。非相对论、固定核 Born–Oppenheimer 基态总能量（含核间排斥）为 **−1.1744759314002167 Ha**。结构文件也记录了参考能量。[数据](../../data/H2_equilibrium/00.yaml) · [Pachucki, Phys. Rev. A 82, 032509 (2010)](https://arxiv.org/abs/1007.0322)
 
+## 已归档的训练曲线
+
+以下文件记录了单张 A100 80GB 上从头训练的全部 10,000 步。能量取训练的指数加权平均值，绝对误差相对于本算例的参考能量。
+
+- [能量和绝对误差 CSV](../../training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv)
+- [能量曲线（Ha）](../../training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/energy_online.png)
+- [绝对误差曲线（mHa）](../../training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png)
+
+## 运行方法
+
 在仓库根目录用 OneQMC 环境执行。单卡从随机初始化训练 10,000 步，再固定最终 checkpoint 独立评估 1,000 步。训练与评估均为每步一个结构、1,024 个电子构型。
 
 ~~~bash

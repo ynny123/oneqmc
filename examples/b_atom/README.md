@@ -2,6 +2,16 @@
 
 中性硼原子 B 的基态为自旋双重态，含 **5 个电子**（3 个自旋向上、2 个自旋向下）。非相对论、无限核质量的 ²P 基态总能量参考值为 **−24.65386890 Ha**，取自显式相关高斯计算的外推结果。[结构文件](../../data/B_atom/00.yaml) · [参考论文表 I](https://arxiv.org/html/2009.08723)
 
+## 已归档的训练曲线
+
+以下文件记录了单张 A100 80GB 上从头训练的全部 10,000 步。能量取训练的指数加权平均值，绝对误差相对于本算例的参考能量。
+
+- [能量和绝对误差 CSV](../../training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv)
+- [能量曲线（Ha）](../../training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/energy_online.png)
+- [绝对误差曲线（mHa）](../../training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png)
+
+## 运行方法
+
 在仓库根目录用 OneQMC 环境执行。单卡从随机初始化训练 **10,000 步**，再固定最终 checkpoint 独立评估 **1,000 步**。训练和评估每步均为一个结构、**1,024 个电子构型**。每次运行使用新的 `-w` 目录。
 
 ~~~bash

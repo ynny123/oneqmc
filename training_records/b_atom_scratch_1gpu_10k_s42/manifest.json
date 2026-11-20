@@ -1,0 +1,39 @@
+{
+  "system": "硼原子 B",
+  "seed": 42,
+  "gpu_count": 1,
+  "gpu_type": "A100 80GB",
+  "electron_configurations_per_update": 1024,
+  "completed_updates": 10000,
+  "status": "COMPLETE",
+  "finished_at": "2026-11-20T11:53:01+08:00",
+  "reference_energy_Ha": "-24.65386890",
+  "final_training_energy_ewm_Ha": -24.653595,
+  "final_training_absolute_energy_error_mHa": 0.274658203125,
+  "files": [
+    {
+      "path": "results/analysis/absolute_energy_error_online.csv",
+      "bytes": 343725,
+      "sha256": "8718e14e6784bc6d688650a704db6e2ff5162ed29815ee3463b96a3785a87df1",
+      "source_sha256": "8718e14e6784bc6d688650a704db6e2ff5162ed29815ee3463b96a3785a87df1",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/energy_online.png",
+      "bytes": 39815,
+      "sha256": "9b4a4ed664b27c4905db87884b6fbb3e0bbdf42f2365b28828dcc06f2958b6b3",
+      "source_sha256": "9b4a4ed664b27c4905db87884b6fbb3e0bbdf42f2365b28828dcc06f2958b6b3",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/analysis/absolute_energy_error_online.png",
+      "bytes": 62566,
+      "sha256": "fe47e1596feabbc90a09fe1f0e96f85530ff348a2f8232c5fecc5fd12ad00ba0",
+      "source_sha256": "fe47e1596feabbc90a09fe1f0e96f85530ff348a2f8232c5fecc5fd12ad00ba0",
+      "location": "repository",
+      "local_paths_replaced": false
+    }
+  ]
+}

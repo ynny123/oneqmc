@@ -14,8 +14,8 @@ Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAM
 for the systems, full settings, launch commands, output layout, and metrics.
 Ethane uses **seed 219**, matching its existing four-GPU run. LiCN and H4
 use **seed 42**.
-Training logs, metric CSVs, and curves for these three runs are available in
-[training_records/](training_records/README.md), totaling about 8 MB.
+Training records for all five examples, including energy and absolute error
+curves for H2 and B, are available in [training_records/](training_records/README.md).
 Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |

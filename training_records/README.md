@@ -1,12 +1,14 @@
 # 已完成算例的训练记录
 
-这里公开 LiCN、H₄、乙烷三个从头训练算例的训练日志、完整指标 CSV、PNG/PDF 曲线、实际配置和运行状态。文件可直接在 GitHub 中查看或克隆下载，合计约 **8 MB**，单个文件不足 **2 MB**。
+这里收录已完成的从头训练记录。LiCN、H₄ 和乙烷目录包含日志、指标、曲线和运行配置。H₂ 和硼原子 B 目录保存了完整的能量和绝对误差 CSV、PNG 曲线及校验清单。
 
 | 算例 | seed / GPU | 完成步数 | 训练日志 | 完整曲线 CSV | 曲线 PNG |
 | --- | --- | --- | --- | --- | --- |
 | LiCN，5 geometries | 42 / 1×A100 80GB | 20,000 | [日志](licn_default_1gpu_20k_s42/results/oneqmc_train.log) | [MARE](licn_default_1gpu_20k_s42/results/analysis/mare_online.csv) | [MARE 图](licn_default_1gpu_20k_s42/results/analysis/mare_online.png) |
 | H₄ rectangles，6 geometries | 42 / 1×A100 80GB | 16,000 | [日志](h4_globe6_scratch_1gpu_16k_s42/results/oneqmc_train.log) | [绝对能量](h4_globe6_scratch_1gpu_16k_s42/results/analysis/h4_convergence.csv) | [能量图](h4_globe6_scratch_1gpu_16k_s42/results/analysis/h4_convergence.png) |
 | 乙烷 BBMEP，20 geometries | 219 / 4×A100 80GB | 32,000 | [日志](ethane_scratch_4gpu_32k_s219/results/oneqmc_train.log) | [MARE](ethane_scratch_4gpu_32k_s219/results/analysis/mare_online.csv) | [MARE 图](ethane_scratch_4gpu_32k_s219/results/analysis/mare_online.png) |
+| H₂，1 geometry | 42 / 1×A100 80GB | 10,000 | — | [能量与绝对误差](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) | [能量](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/energy_online.png) · [绝对误差](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
+| 硼原子 B，1 geometry | 42 / 1×A100 80GB | 10,000 | — | [能量与绝对误差](b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) | [能量](b_atom_scratch_1gpu_10k_s42/results/analysis/energy_online.png) · [绝对误差](b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
 
 LiCN 最终在线 EWM MARE 为 **0.11681 kcal/mol**，乙烷为 **0.59324 kcal/mol**。H₄ 最后 200 步的六结构平均绝对能量为 **−2.01615644 Ha**，不减最低能量。MARE 是训练过程的在线统计，不是固定 checkpoint 的独立采样评估。
 
