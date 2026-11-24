@@ -1,0 +1,25 @@
+[2026-11-23 16:59:59,062 INFO oneqmc line 106]: Running `transferable.py` with args: Namespace(ansatz='orbformer-se', autoresume=False, chkpt=None, data_file_whitelist=None, data_json_whitelist=None, dataset='CH4', decorr_steps=60, edge_feats=True, electron_batch_size=1024, eq_auto_exit=False, flash_attn=True, increment_max_charge=0, increment_max_down=0, increment_max_nuc=0, increment_max_up=0, jax_matmul_precision='high', max_eq_steps=500, mcmc='metropolis', mcmc_n_block=1, mcmc_permutations=False, metric_logger='default', metric_logger_period=1, n_envelopes_per_nucleus=8, orb_parameter_mode='chem-pretrain', seed=42, workdir='${RUN_DIR}/results/fit', n_determinants=16, train_steps=50000, chkpts_fast_interval=101, chkpts_slow_interval=10000, chkpts_steps=None, sync_sampler_state=True, clip_width=5.0, discard_sampler_state=False, increment_max_species=None, laplacian='forward', local_energy_chunk_size=None, mol_batch_size=1, repeat_single_mol=False, mcmc_pruning=True, damping=0.001, data_augmentation=[], det_penalty_weight=0.001, learning_rate=0.05, max_data_set_size=None, max_restarts=1, multi_system_sampler='stack', n_pretrain_mols=None, norm_constraint=0.001, optimizer='kfac', pretrain_equilibration=True, pretrain_learning_rate=0.001, pretrain_mode='mo', pretrain_steps=0, repeated_sampling_len=1, report_unclipped_energy=True, test=False, spring_mu=0.99, stop_early=False, convergence_criterion_period=1000, convergence_threshold=0, balance_grad=False)
+[2026-11-23 16:59:59,067 INFO oneqmc line 176]: Loaded dataset of 1 molecules.
+[2026-11-23 16:59:59,067 INFO oneqmc.entrypoint line 153]: ModelDimensions(max_nuc=5, max_up=5, max_down=5, max_charge=6, max_species=6)
+[2026-11-23 16:59:59,765 DEBUG oneqmc.train line 158]: Initialising Ansatz parameters
+[2026-11-23 17:00:21,998 INFO oneqmc.train line 163]: Number of model parameters: 3029650
+[2026-11-23 17:00:22,209 DEBUG oneqmc.train line 232]: Building training dataset
+[2026-11-23 17:00:22,209 INFO oneqmc.train line 236]: Initialising and preparing sampler
+[2026-11-23 17:02:00,888 INFO oneqmc.train line 249]: Start training
+[2026-11-23 17:03:21,365 INFO oneqmc.train line 330]: Progress: 1/50000, energy = -14.8(1.0)
+[2026-11-23 17:03:38,188 INFO oneqmc.train line 330]: Progress: 31/50000, energy = -38.49(19)
+[2026-11-23 17:03:51,922 INFO oneqmc.train line 330]: Progress: 57/50000, energy = -39.59(4)
+[2026-11-23 17:04:30,744 INFO oneqmc.train line 330]: Progress: 129/50000, energy = -40.190(30)
+[2026-11-23 17:05:10,265 INFO oneqmc.train line 330]: Progress: 204/50000, energy = -40.291(15)
+[2026-11-23 17:07:06,906 INFO oneqmc.train line 330]: Progress: 424/50000, energy = -40.418(7)
+[2026-11-23 17:11:59,206 INFO oneqmc.train line 330]: Progress: 978/50000, energy = -40.466(4)
+[2026-11-23 17:22:46,952 INFO oneqmc.train line 330]: Progress: 2212/50000, energy = -40.4910(21)
+[2026-11-23 17:42:07,280 INFO oneqmc.train line 330]: Progress: 4395/50000, energy = -40.5011(11)
+[2026-11-23 18:04:33,528 INFO oneqmc.train line 330]: Progress: 6940/50000, energy = -40.5061(7)
+[2026-11-23 18:15:58,595 INFO oneqmc.train line 330]: Progress: 8230/50000, energy = -40.5098(4)
+[2026-11-23 18:33:17,282 INFO oneqmc.train line 330]: Progress: 10181/50000, energy = -40.51173(31)
+[2026-11-23 19:03:38,303 INFO oneqmc.train line 330]: Progress: 13611/50000, energy = -40.51326(23)
+[2026-11-23 20:10:04,504 INFO oneqmc.train line 330]: Progress: 21086/50000, energy = -40.51359(19)
+[2026-11-23 22:13:35,578 INFO oneqmc.train line 330]: Progress: 35003/50000, energy = -40.51396(13)
+[2026-11-24 00:27:07,519 INFO oneqmc.train line 332]: Progress: 50000/50000, energy = -40.51396(14)
+[2026-11-24 00:27:07,891 INFO oneqmc.train line 353]: The training has been completed!

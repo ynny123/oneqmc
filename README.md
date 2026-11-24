@@ -8,33 +8,38 @@
 
 This package provides an implementation of the [Orbformer wave function foundation model](https://arxiv.org/abs/2506.19960).
 
-This README introduces three Orbformer-SE scratch-training examples and two small
-single-GPU benchmarks. All start from random parameters with zero HF pretraining.
+This README introduces Orbformer-SE scratch-training examples, including four
+single-geometry, single-GPU benchmarks. All start from random parameters with zero HF pretraining.
 Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAMPLES_zh.md)
 for the systems, full settings, launch commands, output layout, and metrics.
-Ethane uses **seed 219**, matching its existing four-GPU run. LiCN and H4
+The four-GPU Ethane BBMEP example uses **seed 219**. The single-GPU examples
 use **seed 42**.
-Training records for all five examples, including energy and absolute error
-curves for H2 and B, are available in [training_records/](training_records/README.md).
+Archived results, including energy and absolute error curves for H2, B, and CH4, are
+available in [training_records/](training_records/README.md).
 Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
 | --- | --- | --- | --- | --- |
 | [H2 equilibrium benchmark](examples/h2_equilibrium/README.md), 1 geometry | 1 | **1 × 1024** | 10,000 / 42 | Absolute energy error (mHa) |
 | [B atom benchmark](examples/b_atom/README.md), 1 geometry | 1 | **1 × 1024** | 10,000 / 42 | Absolute energy error (mHa) |
+| [CH4 equilibrium benchmark](examples/single_geometry_hydrocarbons/README.md), 1 geometry | 1 | **1 × 1024** | 50,000 / 42 | Absolute energy error (mHa) |
+| [C2H6 BBMEP image 0 benchmark](examples/single_geometry_hydrocarbons/README.md), 1 geometry | 1 | **1 × 1024** | 50,000 / 42 | Absolute energy error (mHa) |
 | LiCN, 5 geometries | 1 | **1 × 2048** | 20,000 / 42 | Online EWM MARE (kcal/mol) |
 | H4 rectangles, 6 geometries | 1 | **6 × 256** | 16,000 / 42 | Absolute mean energy (Ha), 200-step trailing average |
 | Ethane BBMEP, 20 geometries | 4, single process | **4 × 256**, one geometry per GPU | 32,000 / 219 | Online EWM MARE (kcal/mol) |
 
-H4 energy is plotted directly without subtracting a minimum. LiCN and Ethane
-MARE use reference-centered relative energies; the online curves are training
-diagnostics rather than independent fixed-checkpoint evaluations.
+H4 energy is plotted directly without subtracting a minimum. LiCN and the
+20-geometry Ethane example use MARE based on reference-centered relative
+energies. The online curves track training progress. Independent energy
+estimates use a separate evaluation run with a fixed checkpoint.
 
 The H2 benchmark has two electrons at a fixed bond length of **1.4011 bohr**
 and a reference energy of **−1.1744759314 Ha**. The neutral B atom has five
 electrons in a spin doublet and a reference energy of **−24.65386890 Ha**.
 Both guides include training, live absolute-error plots, and independent
 evaluation commands.
+The CH4 and C2H6 launchers automatically evaluate the final checkpoint for
+1,000 sampling steps with fresh chains.
 
 The repository includes code, documentation, geometry inputs, small reference-energy
 tables in `data/references/`, and the published records above.
@@ -63,6 +68,24 @@ The VMC objective is energy minimization. The loss trend below uses the exponent
 | B | ![B VMC energy over 10,000 training steps](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/energy_online.png) | ![B absolute energy error over 10,000 training steps](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
 
 Download the full per-step data for [H₂](training_records/h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) and [B](training_records/b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv).
+
+## CH₄ single-geometry training results
+
+CH₄ completed **50,000 updates in 7 h 27 min 26 s** on one A100 80 GB.
+The automatic evaluation used the final checkpoint for 1,000 sampling steps
+and took **7 min 26 s**. Training and evaluation times include initialization,
+sampler equilibration, and compilation.
+
+| Metric | Final training EWM | Fixed-checkpoint evaluation |
+| --- | ---: | ---: |
+| Energy (Ha) | −40.513958 | **−40.514028** |
+| Absolute error vs. reference (mHa) | 0.584 | **0.512** |
+
+| VMC energy (loss trend) | Absolute energy error |
+| --- | --- |
+| ![CH₄ VMC energy over 50,000 training updates](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/energy_online.png) | ![CH₄ absolute energy error over 50,000 training updates](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.png) |
+
+Download the [50,000-step training CSV](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.csv) and [evaluation summary](training_records/ch4_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json).
 
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints

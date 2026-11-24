@@ -1,0 +1,10 @@
+{
+  "dataset": "CH4",
+  "checkpoint": "${RUN_DIR}/results/fit/training/chkpt-50000.pt",
+  "seed": 20261119,
+  "evaluation_steps": 1000,
+  "electron_batch_size": 1024,
+  "energy_Ha": -40.51402810668945,
+  "reference_energy_Ha": -40.51454,
+  "absolute_energy_error_mHa": 0.5118933105450196
+}

@@ -1,0 +1,102 @@
+{
+  "system": "CH₄",
+  "seed": 42,
+  "gpu_count": 1,
+  "gpu_type": "A100 80GB",
+  "electron_configurations_per_update": 1024,
+  "completed_updates": 50000,
+  "status": "COMPLETE",
+  "finished_at": "2026-11-24T00:27:07.891000+00:00",
+  "training_wall_seconds": 26846,
+  "training_update_loop_wall_seconds": 26707.003,
+  "reference_energy_Ha": -40.51454,
+  "final_training_energy_ewm_Ha": -40.513958,
+  "final_training_absolute_energy_error_mHa": 0.583648681640625,
+  "evaluation_finished_at": "2026-11-24T00:34:36.350000+00:00",
+  "evaluation_wall_seconds": 446,
+  "evaluation_steps": 1000,
+  "evaluation_energy_Ha": -40.51402810668945,
+  "evaluation_absolute_energy_error_mHa": 0.5118933105450196,
+  "files": [
+    {
+      "path": "results/fit/analysis/absolute_energy_error_online.csv",
+      "bytes": 1703960,
+      "sha256": "cf9e252fc5bb1f1a63794d07298f9163d7bcfc0aa7489f12880608b2caf99259",
+      "source_sha256": "cf9e252fc5bb1f1a63794d07298f9163d7bcfc0aa7489f12880608b2caf99259",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/analysis/absolute_energy_error_online.png",
+      "bytes": 59473,
+      "sha256": "a17f3e418bb7529e92d10f2cd1002ad0050f17d279489700d4c329cca8a0bc10",
+      "source_sha256": "a17f3e418bb7529e92d10f2cd1002ad0050f17d279489700d4c329cca8a0bc10",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/analysis/energy_online.png",
+      "bytes": 33777,
+      "sha256": "619160a278cff3d0ea43f1e85936f4015457f24deaa12e696a2c41787765efa2",
+      "source_sha256": "619160a278cff3d0ea43f1e85936f4015457f24deaa12e696a2c41787765efa2",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/oneqmc_train.log",
+      "bytes": 3747,
+      "sha256": "337c396e7107bcccc23f5976422ff5cb6acf1909c941a51181c2b51d5c59e77e",
+      "source_sha256": "00f7148c4df9b9d34170e73ea225488fcb2e24938cd6d71dad0820e27f9bc1d0",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/fit/training/config.yaml",
+      "bytes": 1568,
+      "sha256": "a57a2c39147a748402682e1d8e7d78dc99cbff8dc4989298ab5fd1bbe3848ef2",
+      "source_sha256": "f227c3f66843c05009d19b10edf31e9f7508529623823f8d72278c2df3deba3c",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/analysis/evaluation.json",
+      "bytes": 290,
+      "sha256": "91c1bb56d67ce8832a5ebfd4842515312850c4f5e701ea3b0f042a4c0433fea7",
+      "source_sha256": "96197f6ef0f18f6622728213f8d02152e6e7a5c975520a5a4fb07f8193644193",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/oneqmc_train.log",
+      "bytes": 2528,
+      "sha256": "a0bddf34d13fe23488ad112f0a5f4a5b8c68c502854487ce64009e46718e8266",
+      "source_sha256": "d37160d6092f2b77d9b8a28ef897f926339c8b7138945128f4387d9ede5379b7",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/training/config.yaml",
+      "bytes": 1620,
+      "sha256": "7d2b4a1fea8666a554587c757f1b382521a26a89b18f684f35d4994d7e71aafc",
+      "source_sha256": "088310f4e464a71b17627f746c72116bc65b06b6658cac20f4f65dceb6a6d225",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/training_wall_seconds.txt",
+      "bytes": 6,
+      "sha256": "0b10b940d46eee16f0a9a1e32e14a29c8d570a1a782eedf5928fe8da8fe4f33e",
+      "source_sha256": "0b10b940d46eee16f0a9a1e32e14a29c8d570a1a782eedf5928fe8da8fe4f33e",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/evaluation_wall_seconds.txt",
+      "bytes": 4,
+      "sha256": "f22c56f84d86d7de672aa9f5ed8142b809ef2b0496d4fbf1e18bf3a0e5efac9f",
+      "source_sha256": "f22c56f84d86d7de672aa9f5ed8142b809ef2b0496d4fbf1e18bf3a0e5efac9f",
+      "location": "repository",
+      "local_paths_replaced": false
+    }
+  ]
+}

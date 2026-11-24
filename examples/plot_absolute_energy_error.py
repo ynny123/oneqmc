@@ -33,7 +33,7 @@ def read_metrics(source):
     return energy[:, 0], error[:, 0].astype(float) * 1000
 
 
-def export(output, energy, error):
+def export(output, energy, error, reference_energy=None):
     output.mkdir(parents=True, exist_ok=True)
     steps = np.arange(1, len(error) + 1)
     with TemporaryDirectory(prefix=".energy-error-", dir=output) as work:
@@ -56,7 +56,20 @@ def export(output, energy, error):
             fig.savefig(plot_path, dpi=150)
         finally:
             plt.close(fig)
-        for path in (csv_path, plot_path):
+
+        energy_path = tmp / "energy_online.png"
+        fig, ax = plt.subplots(figsize=(7.2, 4.2), layout="constrained")
+        ax.plot(steps, energy, label="Online EWM energy", linewidth=1.4)
+        if reference_energy is not None:
+            ax.axhline(reference_energy, color="0.35", linestyle="--", label="Reference energy")
+        ax.set(xlabel="Completed training updates", ylabel="Energy (Ha)")
+        ax.grid(alpha=0.25)
+        ax.legend()
+        try:
+            fig.savefig(energy_path, dpi=150)
+        finally:
+            plt.close(fig)
+        for path in (plot_path, energy_path, csv_path):
             path.replace(output / path.name)
 
 
@@ -65,9 +78,12 @@ def main():
     parser.add_argument("--run-dir", type=Path, required=True, help="Training -w directory.")
     parser.add_argument("--watch", action="store_true", help="Refresh periodically until Ctrl-C.")
     parser.add_argument("--interval", type=float, default=60, help="Seconds between reads in watch mode.")
+    parser.add_argument("--reference-energy", type=float, help="Reference energy in Ha for the energy plot.")
     args = parser.parse_args()
     if not math.isfinite(args.interval) or args.interval <= 0:
         parser.error("--interval must be a positive finite number.")
+    if args.reference_energy is not None and not math.isfinite(args.reference_energy):
+        parser.error("--reference-energy must be finite.")
     source = args.run_dir / "training/result.h5"
     output = args.run_dir / "analysis"
     previous_count = None
@@ -85,7 +101,7 @@ def main():
         else:
             previous_error = None
             if len(error) != previous_count:
-                export(output, energy, error)
+                export(output, energy, error, args.reference_energy)
                 previous_count = len(error)
                 print(f"Step {len(error)}: |E - E_ref| = {error[-1]:.4f} mHa", flush=True)
         if not args.watch:
