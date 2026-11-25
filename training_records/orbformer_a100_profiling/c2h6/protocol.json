@@ -1,0 +1,12 @@
+{
+  "dataset": "C2H6_bbmep_00",
+  "seed": 42,
+  "electron_batch_size": 1024,
+  "molecule_batch_size": 1,
+  "optimizer": "kfac",
+  "original_learning_rate_schedule_steps": 50000,
+  "warmup_updates": 32,
+  "profiled_updates": 12,
+  "first_profiled_update": 33,
+  "last_profiled_update": 44
+}

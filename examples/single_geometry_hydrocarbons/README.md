@@ -39,3 +39,5 @@ bash examples/single_geometry_hydrocarbons/run.sh c2h6 runs/c2h6_single_50k
 甲烷在单张 A100 80 GB 上完成 50,000 步训练，耗时 **7 小时 27 分 26 秒**。随后评估 1,000 步，耗时 **7 分 26 秒**，评估能量为 **−40.514028 Ha**，绝对误差为 **0.512 mHa**。[训练 CSV 与曲线](../../training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis) · [评估结果](../../training_records/ch4_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json) · [完整归档](../../training_records/ch4_single_scratch_1gpu_50k_s42)
 
 乙烷在单张 A100 80 GB 上完成 50,000 步训练，耗时 **13 小时 46 分 14 秒**。随后评估 1,000 步，耗时 **15 分 15 秒**，评估能量为 **−79.823266 Ha**，相对参考值的绝对误差为 **1.583 mHa**。[训练 CSV 与曲线](../../training_records/c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis) · [评估结果](../../training_records/c2h6_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json) · [完整归档](../../training_records/c2h6_single_scratch_1gpu_50k_s42)
+
+同样的单卡和 batch 设置还用于短程 profiling。统计覆盖第 33–44 步，提供各训练阶段、GPU kernel 和可归属的 XLA 算子耗时。[A100 算子与阶段统计](../../training_records/orbformer_a100_profiling/README.md)

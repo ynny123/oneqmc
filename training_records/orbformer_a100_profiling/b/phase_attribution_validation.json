@@ -1,0 +1,24 @@
+{
+  "updates": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "kernel_calls": 254759,
+  "gpu_kernel_total_ms": 2833.574863,
+  "direct_match_pct": 81.91315582686266,
+  "bracket_inferred_pct": 17.533904379501127,
+  "unattributed_pct": 0.5529397936362199,
+  "known_kernel_holdout_predictions": 5576,
+  "known_kernel_holdout_errors": 0,
+  "notes": "GPU shares use the sum of CUPTI compute kernel durations, excluding data movement and host time. Direct matching uses CUPTI correlation ID plus exact kernel name inside a host scope. Inferred kernels are bounded by direct kernels in one CUDA stream with the same phase and update. The host scope column is the elapsed time of the host-side annotation."
+}

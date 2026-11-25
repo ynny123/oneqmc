@@ -1,0 +1,182 @@
+{
+  "profiled_updates": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "gpu_device": "/device:GPU:0",
+  "kernel_count": 259835,
+  "unique_kernel_names": 1342,
+  "kernel_duration_sum_ms": 2452.394731,
+  "kernel_busy_union_ms": 2452.202753,
+  "gpu_transfer_duration_sum_ms": 60.829334,
+  "host_update_window_ms": 5410.415313,
+  "kernel_duration_with_xla_op_pct": 85.53034576716352,
+  "kernel_starts_outside_host_update_markers": 11,
+  "unclassified_gpu_stream_activity_ms": {},
+  "xplane_warnings": [],
+  "share_denominator": "Sum of CUPTI GPU compute kernel durations across the complete trace; excludes transfers and host time.",
+  "top_kernels": [
+    {
+      "kernel": "void getrf_pivot<getrf_params_<float, 256, 1, 256, 256, 1> >(int, int, int, void*, int, long*, int, getrf_params_<float, 256, 1, 256, 256, 1>::data_type*, unsigned int*, unsigned int*, getrf_params_<float, 256, 1, 256, 256, 1>::data_type*, unsigned int, unsigned int, unsigned int, int*)",
+      "calls": 552,
+      "total_ms": 219.52737100000002,
+      "mean_us": 397.69451268115944,
+      "share_pct": 8.951551241935856
+    },
+    {
+      "kernel": "mhsea_batched__1",
+      "calls": 2976,
+      "total_ms": 171.850826,
+      "mean_us": 57.745573252688175,
+      "share_pct": 7.007470038476445
+    },
+    {
+      "kernel": "void getrf_pivot<getrf_params_<float, 256, 2, 512, 64, 8> >(int, int, int, void*, int, long*, int, getrf_params_<float, 256, 2, 512, 64, 8>::data_type*, unsigned int*, unsigned int*, getrf_params_<float, 256, 2, 512, 64, 8>::data_type*, unsigned int, unsigned int, unsigned int, int*)",
+      "calls": 768,
+      "total_ms": 150.535098,
+      "mean_us": 196.0092421875,
+      "share_pct": 6.138289896692816
+    },
+    {
+      "kernel": "void kernel_trsm_l_mul32<float, 8, true, false, false, false>(int, int, float const*, float const*, int, float*, int, float, int)",
+      "calls": 1788,
+      "total_ms": 97.492833,
+      "mean_us": 54.526192953020136,
+      "share_pct": 3.9754135730117905
+    },
+    {
+      "kernel": "ampere_sgemm_128x64_nn",
+      "calls": 216,
+      "total_ms": 96.524046,
+      "mean_us": 446.87058333333334,
+      "share_pct": 3.935909859039735
+    },
+    {
+      "kernel": "ampere_sgemm_32x128_nn",
+      "calls": 96,
+      "total_ms": 95.335852,
+      "mean_us": 993.0817916666666,
+      "share_pct": 3.8874595021302056
+    },
+    {
+      "kernel": "void kernel_trsm_l_mul32<float, 8, false, false, false, true>(int, int, float const*, float const*, int, float*, int, float, int)",
+      "calls": 3012,
+      "total_ms": 94.457498,
+      "mean_us": 31.360391102257637,
+      "share_pct": 3.8516433266631416
+    },
+    {
+      "kernel": "void getrf_pivot<getrf_params_<float, 128, 1, 128, 128, 1> >(int, int, int, void*, int, long*, int, getrf_params_<float, 128, 1, 128, 128, 1>::data_type*, unsigned int*, unsigned int*, getrf_params_<float, 128, 1, 128, 128, 1>::data_type*, unsigned int, unsigned int, unsigned int, int*)",
+      "calls": 480,
+      "total_ms": 87.96312300000001,
+      "mean_us": 183.25650625,
+      "share_pct": 3.5868256397750353
+    },
+    {
+      "kernel": "void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_128x64_16x6_nn_align4>(cutlass_80_tensorop_s1688gemm_128x64_16x6_nn_align4::Params)",
+      "calls": 7380,
+      "total_ms": 77.387106,
+      "mean_us": 10.486057723577236,
+      "share_pct": 3.1555730006174114
+    },
+    {
+      "kernel": "void getrf_pivot<getrf_params_<float, 512, 1, 512, 512, 1> >(int, int, int, void*, int, long*, int, getrf_params_<float, 512, 1, 512, 512, 1>::data_type*, unsigned int*, unsigned int*, getrf_params_<float, 512, 1, 512, 512, 1>::data_type*, unsigned int, unsigned int, unsigned int, int*)",
+      "calls": 132,
+      "total_ms": 71.799325,
+      "mean_us": 543.9342803030303,
+      "share_pct": 2.9277230167071333
+    }
+  ],
+  "top_xla_ops": [
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "custom-call.1066.0",
+      "calls": 2520,
+      "total_ms": 187.48890400000002,
+      "mean_us": 74.40035873015873,
+      "share_pct": 7.645135655773842
+    },
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "custom-call.1062.0",
+      "calls": 2520,
+      "total_ms": 187.445627,
+      "mean_us": 74.38318531746032,
+      "share_pct": 7.643370972484771
+    },
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "triangular-solve.1891.0",
+      "calls": 372,
+      "total_ms": 69.02909600000001,
+      "mean_us": 185.5620860215054,
+      "share_pct": 2.8147628571951944
+    },
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "triangular-solve.1887.0",
+      "calls": 372,
+      "total_ms": 69.000593,
+      "mean_us": 185.48546505376342,
+      "share_pct": 2.8136006054728386
+    },
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "triangular-solve.1886.0",
+      "calls": 372,
+      "total_ms": 64.051543,
+      "mean_us": 172.18156720430107,
+      "share_pct": 2.6117958169760884
+    },
+    {
+      "hlo_module": "pmap__step",
+      "xla_op": "triangular-solve.1890.0",
+      "calls": 372,
+      "total_ms": 63.985761,
+      "mean_us": 172.00473387096773,
+      "share_pct": 2.60911345923129
+    },
+    {
+      "hlo_module": "pmap_sample_wf",
+      "xla_op": "custom-call.5.0",
+      "calls": 720,
+      "total_ms": 42.310144,
+      "mean_us": 58.76408888888889,
+      "share_pct": 1.7252583144617757
+    },
+    {
+      "hlo_module": "pmap_sample_wf",
+      "xla_op": "custom-call.8.0",
+      "calls": 720,
+      "total_ms": 41.651303999999996,
+      "mean_us": 57.84903333333333,
+      "share_pct": 1.6983931450144676
+    },
+    {
+      "hlo_module": "pmap_sample_wf",
+      "xla_op": "custom-call.7.0",
+      "calls": 720,
+      "total_ms": 41.377029,
+      "mean_us": 57.46809583333334,
+      "share_pct": 1.687209178724989
+    },
+    {
+      "hlo_module": "pmap_sample_wf",
+      "xla_op": "custom-call.6.0",
+      "calls": 720,
+      "total_ms": 41.213544,
+      "mean_us": 57.241033333333334,
+      "share_pct": 1.6805428375388236
+    }
+  ]
+}
