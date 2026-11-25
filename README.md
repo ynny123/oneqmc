@@ -112,6 +112,10 @@ Download the [50,000-step training CSV](training_records/c2h6_single_scratch_1gp
 
 H₂, B, CH₄, and C₂H₆ were profiled on one A100 80 GB per case, using one fixed geometry and 1,024 electron configurations per update. The reports cover updates 33–44 and include GPU kernel, XLA operation, and training phase timings for MCMC sampling, local energy, K-FAC, and sampler refresh. [Profiling methods and results](training_records/orbformer_a100_profiling/README.md) · [Kernel family CSV](training_records/orbformer_a100_profiling/kernel_family_shares.csv) · [Training phase CSV](training_records/orbformer_a100_profiling/phase_timing_summary.csv)
 
+## Multi-geometry profiling
+
+LiCN and H₄ were profiled on one A100 80 GB each, and the 20-geometry Ethane BBMEP example used four A100 80 GB GPUs. The reports cover updates 36–45 with each example’s original training batch and include kernel, XLA operation, training phase, and per-device timings. [Methods and results](training_records/orbformer_a100_multigeometry_profiling/README.md) · [Kernel family CSV](training_records/orbformer_a100_multigeometry_profiling/kernel_family_comparison.csv) · [Training phase CSV](training_records/orbformer_a100_multigeometry_profiling/phase_timing_comparison.csv) · [Per-device CSV](training_records/orbformer_a100_multigeometry_profiling/device_timing.csv)
+
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints
  - Light Atom Curriculum dataset, and other datasets referenced in the Orbformer paper

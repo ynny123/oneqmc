@@ -1,0 +1,11 @@
+device,phase,attribution,gpu_ms_per_update,device_gpu_share_pct
+0,kfac_update,direct,126.3685141,45.52946574001788
+0,kfac_update,same_stream_bracket,9.4858214,3.417658136784473
+0,local_energy,direct,13.4872421,4.859334870657285
+0,local_energy,same_stream_bracket,9.0072564,3.2452353705040267
+0,mcmc_sampling,direct,79.4257253,28.61639123223988
+0,mcmc_sampling,same_stream_bracket,35.7676181,12.88675865569898
+0,other_step_work,direct,0.8591784,0.3095544313863494
+0,sampler_refresh,direct,1.3134517,0.47322511150994256
+0,sampler_refresh,same_stream_bracket,0.5307033,0.19120773784159287
+0,unattributed,unattributed,1.3077441,0.47116871335959243

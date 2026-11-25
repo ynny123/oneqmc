@@ -1,0 +1,16 @@
+{
+  "case": "ethane_bbmep",
+  "dataset": "bbmep/Ethane",
+  "devices": 4,
+  "geometry_count": 20,
+  "mol_batch": 4,
+  "electron_batch": 256,
+  "original_training_steps": 32000,
+  "seed": 219,
+  "warmup": 35,
+  "captured": 10,
+  "window": 5,
+  "execution": "remote",
+  "gpu_model": "A100-SXM4-80GB",
+  "jax_version": "0.4.34"
+}

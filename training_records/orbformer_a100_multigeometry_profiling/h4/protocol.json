@@ -1,0 +1,16 @@
+{
+  "case": "h4",
+  "dataset": "h4_globe6",
+  "devices": 1,
+  "geometry_count": 6,
+  "mol_batch": 6,
+  "electron_batch": 256,
+  "original_training_steps": 16000,
+  "seed": 42,
+  "warmup": 35,
+  "captured": 10,
+  "window": 5,
+  "execution": "local",
+  "gpu_model": "A100-SXM4-80GB",
+  "jax_version": "0.4.34"
+}

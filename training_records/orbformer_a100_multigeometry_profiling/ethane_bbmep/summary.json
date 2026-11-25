@@ -1,0 +1,158 @@
+{
+  "protocol": {
+    "case": "ethane_bbmep",
+    "dataset": "bbmep/Ethane",
+    "devices": 4,
+    "geometry_count": 20,
+    "mol_batch": 4,
+    "electron_batch": 256,
+    "original_training_steps": 32000,
+    "seed": 219,
+    "warmup": 35,
+    "captured": 10,
+    "window": 5,
+    "execution": "remote",
+    "gpu_model": "A100-SXM4-80GB",
+    "jax_version": "0.4.34"
+  },
+  "profiled_updates": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "geometry_visits": {
+    "0": 2,
+    "1": 2,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "5": 1,
+    "6": 2,
+    "7": 2,
+    "8": 1,
+    "9": 3,
+    "10": 2,
+    "11": 1,
+    "12": 3,
+    "13": 2,
+    "14": 2,
+    "15": 3,
+    "16": 3,
+    "17": 1,
+    "18": 3,
+    "19": 2
+  },
+  "gpu_kernel_calls": 1140136,
+  "gpu_ms_per_update_sum_across_devices": 1183.2282196,
+  "gpu_ms_per_update_by_device": {
+    "0": 280.3135373,
+    "1": 301.9921506,
+    "2": 301.7361244,
+    "3": 299.18640730000004
+  },
+  "gpu_busy_union_ms_per_update_by_device": {
+    "0": 280.28240070000004,
+    "1": 301.95839970000003,
+    "2": 301.70450850000003,
+    "3": 299.15371799999997
+  },
+  "transfer_ms_per_update_by_device": {
+    "0": 6.539905,
+    "1": 3.9575367,
+    "2": 4.3594044,
+    "3": 4.3576799
+  },
+  "nccl_ms_per_update_by_device": {
+    "0": 29.933458,
+    "1": 54.2747163,
+    "2": 24.7065891,
+    "3": 24.6752996
+  },
+  "host_window_ms_per_update": 676.7489701000001,
+  "hlo_op_coverage_pct": 69.55743601840648,
+  "phase_attribution_pct": {
+    "unattributed": 0.794681528401911,
+    "direct": 0.1045145289399925,
+    "same_stream_bracket": 29.666192395129382,
+    "hlo_module": 69.43461154752872
+  },
+  "heldout_predictions": 24762,
+  "heldout_errors": 0,
+  "phase_timing": [
+    {
+      "phase": "mcmc_sampling",
+      "gpu_ms_per_update": 472.27045200000003,
+      "gpu_share_pct": 39.91372451881302,
+      "host_scope_ms_per_update": 202.93227389999998
+    },
+    {
+      "phase": "local_energy",
+      "gpu_ms_per_update": 324.86371829999996,
+      "gpu_share_pct": 27.455710818815902,
+      "host_scope_ms_per_update": 76.62364199999999
+    },
+    {
+      "phase": "kfac_update",
+      "gpu_ms_per_update": 299.6212765,
+      "gpu_share_pct": 25.322357220426117,
+      "host_scope_ms_per_update": 107.5285163
+    },
+    {
+      "phase": "sampler_refresh",
+      "gpu_ms_per_update": 76.0426871,
+      "gpu_share_pct": 6.4267134471916885,
+      "host_scope_ms_per_update": 22.3232713
+    },
+    {
+      "phase": "other_step_work",
+      "gpu_ms_per_update": 1.0271896,
+      "gpu_share_pct": 0.08681246635135612,
+      "host_scope_ms_per_update": ""
+    },
+    {
+      "phase": "unattributed",
+      "gpu_ms_per_update": 9.4028961,
+      "gpu_share_pct": 0.794681528401911,
+      "host_scope_ms_per_update": ""
+    }
+  ],
+  "kernel_families": [
+    {
+      "family": "other",
+      "gpu_ms_per_update": 594.1029246,
+      "gpu_share_pct": 50.21034106174728
+    },
+    {
+      "family": "gemm",
+      "gpu_ms_per_update": 257.4357344,
+      "gpu_share_pct": 21.75706513212035
+    },
+    {
+      "family": "nccl",
+      "gpu_ms_per_update": 133.59006300000001,
+      "gpu_share_pct": 11.290303999439873
+    },
+    {
+      "family": "edge_attention_mhsea",
+      "gpu_ms_per_update": 108.86738,
+      "gpu_share_pct": 9.20087758190922
+    },
+    {
+      "family": "lu_getrf",
+      "gpu_ms_per_update": 70.8274502,
+      "gpu_share_pct": 5.985950049766714
+    },
+    {
+      "family": "triangular_solve",
+      "gpu_ms_per_update": 18.4046674,
+      "gpu_share_pct": 1.5554621750165702
+    }
+  ]
+}

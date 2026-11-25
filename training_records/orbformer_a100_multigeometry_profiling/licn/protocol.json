@@ -1,0 +1,16 @@
+{
+  "case": "licn",
+  "dataset": "licn",
+  "devices": 1,
+  "geometry_count": 5,
+  "mol_batch": 1,
+  "electron_batch": 2048,
+  "original_training_steps": 20000,
+  "seed": 42,
+  "warmup": 35,
+  "captured": 10,
+  "window": 5,
+  "execution": "local",
+  "gpu_model": "A100-SXM4-80GB",
+  "jax_version": "0.4.34"
+}

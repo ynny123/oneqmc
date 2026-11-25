@@ -18,6 +18,8 @@ LiCN 最终在线 EWM MARE 为 **0.11681 kcal/mol**，乙烷为 **0.59324 kcal/m
 
 H₂、B、CH₄ 和 C₂H₆ 的单卡 profiling 数据包含算子类别、逐 kernel 与 HLO 明细，以及 MCMC、局部能量、K-FAC 和采样器刷新各阶段的耗时。[A100 算子与阶段统计](orbformer_a100_profiling/README.md)
 
+LiCN、H₄ 和乙烷 BBMEP 的多结构 profiling 另外保存逐卡耗时、结构覆盖和阶段与算子类别的交叉统计，包含乙烷的四卡 NCCL 记录。[多结构 A100 profiling](orbformer_a100_multigeometry_profiling/README.md)
+
 每个算例目录中的 `results/analysis/` 保存完整曲线和逐结构能量；`results/training/config.yaml` 是实际训练配置，`results/runtime_status.json` 记录完成状态与检查结论，`logs/` 或 `results/stdout_stderr.log` 保存标准输出。根目录还保留当时的运行协议、环境版本、冻结源码哈希和退出码（以各目录实际文件为准）。
 
 甲烷归档沿用运行目录结构，`results/fit/` 保存训练记录，`results/evaluation/` 保存最终 checkpoint 的 1,000 步独立评估记录。训练耗时 **7 小时 27 分 26 秒**，评估耗时 **7 分 26 秒**。评估总能量为 **−40.514028 Ha**，绝对误差为 **0.512 mHa**。[甲烷记录目录](ch4_single_scratch_1gpu_50k_s42) · [评估结果](ch4_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json)

@@ -40,3 +40,5 @@ H₂、B、CH₄ 的 GPU 耗时主要集中在 K-FAC 更新。乙烷的局部能
 | C₂H₆ | [kernel](c2h6/kernel_totals.csv) · [HLO](c2h6/xla_op_totals.csv) · [kernel–HLO 对应](c2h6/kernel_xla_ops.csv) | [CSV](c2h6/phase_per_update.csv) | [JSON](c2h6/phase_attribution_validation.json) |
 
 各目录也保存运行参数 `protocol.json`、逐步 GPU 计时 `per_update.csv`、阶段平均值 `phase_timing.csv` 和采集摘要 `summary.json`。`host_scope_ms` 是主机侧阶段标记的时间跨度，反映主机调度和等待等因素。这一列独立于 GPU kernel 累计时间。
+
+[LiCN、H₄ 和四卡乙烷 BBMEP 的多结构 profiling](../orbformer_a100_multigeometry_profiling/README.md)
