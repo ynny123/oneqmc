@@ -1,0 +1,11 @@
+{
+  "dataset": "C2H6_bbmep_00",
+  "checkpoint": "${RUN_DIR}/results/fit/training/chkpt-50000.pt",
+  "seed": 20261119,
+  "evaluation_steps": 1000,
+  "electron_batch_size": 1024,
+  "energy_Ha": -79.82326622772217,
+  "reference_energy_Ha": -79.82484961293652,
+  "absolute_energy_error_mHa": 1.583385214345867,
+  "reference_energy_std_mHa": 1.6364679879643518
+}

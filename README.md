@@ -14,8 +14,8 @@ Start with [单卡与四卡训练示例总说明（中文）](docs/TRAINING_EXAM
 for the systems, full settings, launch commands, output layout, and metrics.
 The four-GPU Ethane BBMEP example uses **seed 219**. The single-GPU examples
 use **seed 42**.
-Archived results, including energy and absolute error curves for H2, B, and CH4, are
-available in [training_records/](training_records/README.md).
+Archived results, including energy and absolute error curves for H2, B, CH4,
+and single-geometry C2H6, are available in [training_records/](training_records/README.md).
 Checkpoint weights, HDF5 files, and TensorBoard event files are not uploaded.
 
 | Example | GPUs (A100 80GB) | Global geometry batch × electron configurations per geometry | Updates / seed | Main metric |
@@ -86,6 +86,27 @@ sampler equilibration, and compilation.
 | ![CH₄ VMC energy over 50,000 training updates](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/energy_online.png) | ![CH₄ absolute energy error over 50,000 training updates](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.png) |
 
 Download the [50,000-step training CSV](training_records/ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.csv) and [evaluation summary](training_records/ch4_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json).
+
+## C₂H₆ single-geometry training results
+
+C₂H₆ completed **50,000 updates in 13 h 46 min 14 s** on one A100 80 GB.
+The automatic evaluation of the final checkpoint took **15 min 15 s** for
+1,000 sampling steps. Both durations include initialization, sampler
+equilibration, and compilation.
+
+| Metric | Final training EWM | Fixed-checkpoint evaluation |
+| --- | ---: | ---: |
+| Energy (Ha) | −79.823440 | **−79.823266** |
+| Absolute error vs. reference (mHa) | 1.411 | **1.583** |
+
+The reference energy for this geometry has a reported statistical uncertainty
+of 1.636 mHa. [Reference data and protocol](examples/single_geometry_hydrocarbons/README.md)
+
+| VMC energy (loss trend) | Absolute energy error |
+| --- | --- |
+| ![C₂H₆ VMC energy over 50,000 training updates](training_records/c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/energy_online.png) | ![C₂H₆ absolute energy error over 50,000 training updates](training_records/c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.png) |
+
+Download the [50,000-step training CSV](training_records/c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.csv) and [evaluation summary](training_records/c2h6_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json).
 
 We also provide the following:
 - the [Neural Electron Real-space Density](https://arxiv.org/abs/2409.01306) model, which can be trained from Orbformer checkpoints

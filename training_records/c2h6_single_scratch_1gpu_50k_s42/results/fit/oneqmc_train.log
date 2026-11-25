@@ -1,0 +1,25 @@
+[2026-11-23 16:58:55,714 INFO oneqmc line 106]: Running `transferable.py` with args: Namespace(ansatz='orbformer-se', autoresume=False, chkpt=None, data_file_whitelist=None, data_json_whitelist=None, dataset='C2H6_bbmep_00', decorr_steps=60, edge_feats=True, electron_batch_size=1024, eq_auto_exit=False, flash_attn=True, increment_max_charge=0, increment_max_down=0, increment_max_nuc=0, increment_max_up=0, jax_matmul_precision='high', max_eq_steps=500, mcmc='metropolis', mcmc_n_block=1, mcmc_permutations=False, metric_logger='default', metric_logger_period=1, n_envelopes_per_nucleus=8, orb_parameter_mode='chem-pretrain', seed=42, workdir='${RUN_DIR}/results/fit', n_determinants=16, train_steps=50000, chkpts_fast_interval=101, chkpts_slow_interval=10000, chkpts_steps=None, sync_sampler_state=True, clip_width=5.0, discard_sampler_state=False, increment_max_species=None, laplacian='forward', local_energy_chunk_size=None, mol_batch_size=1, repeat_single_mol=False, mcmc_pruning=True, damping=0.001, data_augmentation=[], det_penalty_weight=0.001, learning_rate=0.05, max_data_set_size=None, max_restarts=1, multi_system_sampler='stack', n_pretrain_mols=None, norm_constraint=0.001, optimizer='kfac', pretrain_equilibration=True, pretrain_learning_rate=0.001, pretrain_mode='mo', pretrain_steps=0, repeated_sampling_len=1, report_unclipped_energy=True, test=False, spring_mu=0.99, stop_early=False, convergence_criterion_period=1000, convergence_threshold=0, balance_grad=False)
+[2026-11-23 16:58:55,719 INFO oneqmc line 176]: Loaded dataset of 1 molecules.
+[2026-11-23 16:58:55,719 INFO oneqmc.entrypoint line 153]: ModelDimensions(max_nuc=8, max_up=9, max_down=9, max_charge=6, max_species=6)
+[2026-11-23 16:58:56,367 DEBUG oneqmc.train line 158]: Initialising Ansatz parameters
+[2026-11-23 16:59:18,504 INFO oneqmc.train line 163]: Number of model parameters: 3029650
+[2026-11-23 16:59:18,708 DEBUG oneqmc.train line 232]: Building training dataset
+[2026-11-23 16:59:18,708 INFO oneqmc.train line 236]: Initialising and preparing sampler
+[2026-11-23 17:01:59,312 INFO oneqmc.train line 249]: Start training
+[2026-11-23 17:03:15,959 INFO oneqmc.train line 330]: Progress: 1/50000, energy = -34.4(1.0)
+[2026-11-23 17:03:50,071 INFO oneqmc.train line 330]: Progress: 35/50000, energy = -73.76(29)
+[2026-11-23 17:04:04,743 INFO oneqmc.train line 330]: Progress: 50/50000, energy = -75.88(22)
+[2026-11-23 17:04:23,342 INFO oneqmc.train line 330]: Progress: 69/50000, energy = -77.51(9)
+[2026-11-23 17:06:14,962 INFO oneqmc.train line 330]: Progress: 182/50000, energy = -79.209(30)
+[2026-11-23 17:08:09,395 INFO oneqmc.train line 330]: Progress: 299/50000, energy = -79.503(15)
+[2026-11-23 17:12:12,175 INFO oneqmc.train line 330]: Progress: 545/50000, energy = -79.685(8)
+[2026-11-23 17:24:41,402 INFO oneqmc.train line 330]: Progress: 1307/50000, energy = -79.766(4)
+[2026-11-23 18:04:58,328 INFO oneqmc.train line 330]: Progress: 3762/50000, energy = -79.7966(19)
+[2026-11-23 19:06:20,578 INFO oneqmc.train line 330]: Progress: 7499/50000, energy = -79.8114(11)
+[2026-11-23 21:01:00,872 INFO oneqmc.train line 330]: Progress: 14478/50000, energy = -79.8171(7)
+[2026-11-23 22:09:22,093 INFO oneqmc.train line 330]: Progress: 18640/50000, energy = -79.8195(8)
+[2026-11-23 22:45:35,941 INFO oneqmc.train line 330]: Progress: 20843/50000, energy = -79.8214(4)
+[2026-11-23 23:50:41,341 INFO oneqmc.train line 330]: Progress: 24808/50000, energy = -79.82199(28)
+[2026-11-24 03:16:26,082 INFO oneqmc.train line 330]: Progress: 37329/50000, energy = -79.82332(21)
+[2026-11-24 06:44:51,755 INFO oneqmc.train line 332]: Progress: 50000/50000, energy = -79.82344(24)
+[2026-11-24 06:44:52,107 INFO oneqmc.train line 353]: The training has been completed!

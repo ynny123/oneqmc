@@ -1,0 +1,103 @@
+{
+  "system": "C₂H₆",
+  "seed": 42,
+  "gpu_count": 1,
+  "gpu_type": "A100 80GB",
+  "electron_configurations_per_update": 1024,
+  "completed_updates": 50000,
+  "status": "COMPLETE",
+  "finished_at": "2026-11-24T06:44:52.107000+00:00",
+  "training_wall_seconds": 49574,
+  "training_update_loop_wall_seconds": 49372.795,
+  "reference_energy_Ha": -79.82484961293652,
+  "reference_energy_std_mHa": 1.6364679879643518,
+  "final_training_energy_ewm_Ha": -79.82344,
+  "final_training_absolute_energy_error_mHa": 1.41143798828125,
+  "evaluation_finished_at": "2026-11-24T07:00:08.553000+00:00",
+  "evaluation_wall_seconds": 915,
+  "evaluation_steps": 1000,
+  "evaluation_energy_Ha": -79.82326622772217,
+  "evaluation_absolute_energy_error_mHa": 1.583385214345867,
+  "files": [
+    {
+      "path": "results/fit/analysis/absolute_energy_error_online.csv",
+      "bytes": 1679317,
+      "sha256": "534dbf95b2797f2284ce43d81646f773af07028356c1007f49383335e76d29d8",
+      "source_sha256": "534dbf95b2797f2284ce43d81646f773af07028356c1007f49383335e76d29d8",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/analysis/absolute_energy_error_online.png",
+      "bytes": 52185,
+      "sha256": "fd58d8cf35caf05e5ff174c586f654c1811a2f8b8cb27ceb5392d3a5386c165e",
+      "source_sha256": "fd58d8cf35caf05e5ff174c586f654c1811a2f8b8cb27ceb5392d3a5386c165e",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/analysis/energy_online.png",
+      "bytes": 33640,
+      "sha256": "92f7b3eddc4036d36e03a996c13c61826475409dc4542de7ed9ae598ab2cb093",
+      "source_sha256": "92f7b3eddc4036d36e03a996c13c61826475409dc4542de7ed9ae598ab2cb093",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/fit/oneqmc_train.log",
+      "bytes": 3752,
+      "sha256": "52a0afaf30d070db434a383261a0b9bfa3aa06af42b0668f8142699fe2376c65",
+      "source_sha256": "0f327a34090b7b271bcbc0bb984a370d49c952a9acaecf47a0c76a0bacdaf9a2",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/fit/training/config.yaml",
+      "bytes": 1578,
+      "sha256": "cf91bcaa2acd5941569873f8168c65f526c4112652d301c221d3aa891a771d92",
+      "source_sha256": "954c81968d868d98977e5462f0931b888b10836587be57fefb9450ed7f160055",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/analysis/evaluation.json",
+      "bytes": 358,
+      "sha256": "ce4b731623a9c4a9092d72db827c29ba1567a861bd6c47ed9296e73918ba5ab3",
+      "source_sha256": "17ca296612a1179744ddf63d22d3885ddc6483f912221cc9d60d3808cd43f8b4",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/oneqmc_train.log",
+      "bytes": 2538,
+      "sha256": "061a12ebf313d044b79e089e2aae6290d825cd718683a2611a7bbc47f2db6cda",
+      "source_sha256": "5f5ae0d4b11a5ac57bdce4231099cc8ecc1f3e2db3291e599d4ea965b8ca0c17",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/evaluation/training/config.yaml",
+      "bytes": 1630,
+      "sha256": "33bc93073c45d1c7917fad9a09d79724363605da8807a60eb89fd70be9453b3a",
+      "source_sha256": "aa73e4b9615615aad160c8afc933edbf701f3d642d0967a4c344ca0c0444dc17",
+      "location": "repository",
+      "local_paths_replaced": true
+    },
+    {
+      "path": "results/training_wall_seconds.txt",
+      "bytes": 6,
+      "sha256": "f9605d8ceb728094fdc1df75ffdf42796dd7f2cbedd5e812df8f369752763df4",
+      "source_sha256": "f9605d8ceb728094fdc1df75ffdf42796dd7f2cbedd5e812df8f369752763df4",
+      "location": "repository",
+      "local_paths_replaced": false
+    },
+    {
+      "path": "results/evaluation_wall_seconds.txt",
+      "bytes": 4,
+      "sha256": "5dac334cf325e506d4304baaf990f2b52e7e4f5c21388e3f1bcad89b9aa830c8",
+      "source_sha256": "5dac334cf325e506d4304baaf990f2b52e7e4f5c21388e3f1bcad89b9aa830c8",
+      "location": "repository",
+      "local_paths_replaced": false
+    }
+  ]
+}

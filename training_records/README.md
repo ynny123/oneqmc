@@ -1,6 +1,6 @@
 # 已完成算例的训练记录
 
-这里收录已完成的从头训练记录。LiCN、H₄ 和乙烷多结构算例包含日志、指标、曲线和运行配置。H₂、硼原子 B 和甲烷单结构算例保存了完整的能量和绝对误差 CSV、PNG 曲线及校验清单。
+这里收录已完成的从头训练记录。LiCN、H₄ 和乙烷多结构算例包含日志、指标、曲线和运行配置。H₂、硼原子 B、甲烷和乙烷单结构算例保存了完整的能量和绝对误差 CSV、PNG 曲线及校验清单。
 
 | 算例 | seed / GPU | 完成步数 | 训练日志 | 完整曲线 CSV | 曲线 PNG |
 | --- | --- | --- | --- | --- | --- |
@@ -10,6 +10,7 @@
 | H₂，1 geometry | 42 / 1×A100 80GB | 10,000 | — | [能量与绝对误差](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) | [能量](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/energy_online.png) · [绝对误差](h2_equilibrium_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
 | 硼原子 B，1 geometry | 42 / 1×A100 80GB | 10,000 | — | [能量与绝对误差](b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.csv) | [能量](b_atom_scratch_1gpu_10k_s42/results/analysis/energy_online.png) · [绝对误差](b_atom_scratch_1gpu_10k_s42/results/analysis/absolute_energy_error_online.png) |
 | 甲烷 CH₄，1 geometry | 42 / 1×A100 80GB | 50,000 | [日志](ch4_single_scratch_1gpu_50k_s42/results/fit/oneqmc_train.log) | [能量与绝对误差](ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.csv) | [能量](ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/energy_online.png) · [绝对误差](ch4_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.png) |
+| 乙烷 C₂H₆，BBMEP 第 0 帧 | 42 / 1×A100 80GB | 50,000 | [日志](c2h6_single_scratch_1gpu_50k_s42/results/fit/oneqmc_train.log) | [能量与绝对误差](c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.csv) | [能量](c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/energy_online.png) · [绝对误差](c2h6_single_scratch_1gpu_50k_s42/results/fit/analysis/absolute_energy_error_online.png) |
 
 LiCN 最终在线 EWM MARE 为 **0.11681 kcal/mol**，乙烷为 **0.59324 kcal/mol**。H₄ 最后 200 步的六结构平均绝对能量为 **−2.01615644 Ha**，不减最低能量。MARE 是训练过程的在线统计，不是固定 checkpoint 的独立采样评估。
 
@@ -18,6 +19,8 @@ LiCN 最终在线 EWM MARE 为 **0.11681 kcal/mol**，乙烷为 **0.59324 kcal/m
 每个算例目录中的 `results/analysis/` 保存完整曲线和逐结构能量；`results/training/config.yaml` 是实际训练配置，`results/runtime_status.json` 记录完成状态与检查结论，`logs/` 或 `results/stdout_stderr.log` 保存标准输出。根目录还保留当时的运行协议、环境版本、冻结源码哈希和退出码（以各目录实际文件为准）。
 
 甲烷归档沿用运行目录结构，`results/fit/` 保存训练记录，`results/evaluation/` 保存最终 checkpoint 的 1,000 步独立评估记录。训练耗时 **7 小时 27 分 26 秒**，评估耗时 **7 分 26 秒**。评估总能量为 **−40.514028 Ha**，绝对误差为 **0.512 mHa**。[甲烷记录目录](ch4_single_scratch_1gpu_50k_s42) · [评估结果](ch4_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json)
+
+乙烷单结构归档同样包含训练和独立评估记录。训练耗时 **13 小时 46 分 14 秒**，评估耗时 **15 分 15 秒**。评估总能量为 **−79.823266 Ha**，相对参考值的绝对误差为 **1.583 mHa**。[乙烷记录目录](c2h6_single_scratch_1gpu_50k_s42) · [评估结果](c2h6_single_scratch_1gpu_50k_s42/results/evaluation/analysis/evaluation.json)
 
 [1/2/4 小时指标 CSV](time_budget_comparison/time_budget_metrics.csv)、[指标来源与计时口径](time_budget_comparison/time_budget_metrics_metadata.json)，以及逐步时间映射均在 `time_budget_comparison/`。时间包含进程启动后的初始化、平衡和编译，不含调度排队；H₄ 不足 2 小时完成，2、4 小时栏使用其最终结果。
 
